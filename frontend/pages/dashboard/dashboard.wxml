@@ -1,0 +1,81 @@
+<!-- 仪表盘页面 -->
+<view class="dashboard-container">
+  <!-- 顶部导航栏 -->
+  <view class="top-nav">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatar || '/images/default-avatar.png'}}"></image>
+      <view class="user-details">
+        <text class="user-name">{{userInfo.name || '欢迎使用'}}</text>
+        <text class="user-role">{{userRoleText}}</text>
+      </view>
+    </view>
+    <view class="top-actions">
+      <view class="notification-icon" bindtap="navigateToNotifications">
+        <image src="/images/notification.png"></image>
+        <view class="notification-badge" wx:if="notificationCount > 0">{{notificationCount}}</view>
+      </view>
+      <view class="settings-icon" bindtap="navigateToSettings">
+        <image src="/images/settings.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷功能区 -->
+  <view class="quick-functions">
+    <function-item wx:for="{{quickFunctions}}" wx:key="id" id="{{item.id}}" name="{{item.name}}" bind:click="onFunctionClick"></function-item>
+  </view>
+
+  <!-- 数据统计卡片 -->
+  <view class="stats-section">
+    <view class="section-title">
+      <text>数据概览</text>
+      <text class="more" bindtap="onViewMoreStats">更多</text>
+    </view>
+    <view class="stats-cards">
+      <stat-card number="{{statsData.studentsCount}}" label="学生总数" iconText="📚" iconBgColor="#e6f7ff"></stat-card>
+      <stat-card number="{{statsData.teachersCount}}" label="教师总数" iconText="👨‍🏫" iconBgColor="#f6ffed"></stat-card>
+      <stat-card number="{{statsData.parentsCount}}" label="家长总数" iconText="👨‍👩‍👧‍👦" iconBgColor="#fff7e6"></stat-card>
+      <stat-card number="{{statsData.pendingTasks}}" label="待办任务" iconText="📋" iconBgColor="#fff2e8"></stat-card>
+    </view>
+  </view>
+
+  <!-- 最近活动 -->
+  <view class="activities-section">
+    <view class="section-title">
+      <text>最近活动</text>
+    </view>
+    <view class="activities-list">
+      <view wx:if="{{recentActivities.length > 0}}">
+        <activity-item wx:for="{{recentActivities}}" wx:key="id" id="{{item.id}}" title="{{item.title}}" time="{{item.time}}" type="{{item.type}}" bind:click="onActivityClick"></activity-item>
+      </view>
+      <view wx:else class="no-activities">暂无活动记录</view>
+    </view>
+  </view>
+
+  <!-- 教师/家长专属区域 -->
+  <view class="special-section" wx:if="userInfo.role === 'teacher'">
+    <view class="section-title">
+      <text>今日待办</text>
+    </view>
+    <view class="todo-list">
+      <view class="todo-item" wx:for="{{todolist}}" wx:key="id">
+        <view class="todo-checkbox"></view>
+        <text class="todo-content">{{item.content}}</text>
+        <text class="todo-time">{{item.time}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="special-section" wx:if="userInfo.role === 'parent'">
+    <view class="section-title">
+      <text>子女动态</text>
+    </view>
+    <view class="children-activities">
+      <view class="child-activity" wx:for="{{childrenActivities}}" wx:key="id">
+        <view class="child-name">{{item.childName}}</view>
+        <view class="activity-detail">{{item.activity}}</view>
+        <text class="activity-time">{{item.time}}</text>
+      </view>
+    </view>
+  </view>
+</view>

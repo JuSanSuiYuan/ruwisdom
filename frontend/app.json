@@ -1,0 +1,80 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/dashboard/dashboard",
+    "pages/notification/notification",
+    "pages/notification/notification-detail",
+    "pages/schedule/courseSchedule",
+    "pages/homework/homework",
+    "pages/analysis/analysis",
+    "pages/student/student",
+    "pages/settings/settings",
+    "pages/leave-request/leave-request",
+    "pages/leave-list/leave-list",
+    "pages/leave-detail/leave-detail",
+    "pages/oa/oa-dashboard",
+    "pages/oa/system-settings",
+    "pages/oa/user-management",
+    "pages/oa/announcement-management",
+    "pages/oa/leave-management",
+    "pages/ai/ai-assistant",
+    "pages/camera/camera-list",
+    "pages/camera/camera-view"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1aad19",
+    "navigationBarTitleText": "儒智慧",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1aad19",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/dashboard/dashboard",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_selected.png"
+      },
+      {
+        "pagePath": "pages/notification/notification",
+        "text": "通知",
+        "iconPath": "images/notification.png",
+        "selectedIconPath": "images/notification_selected.png"
+      },
+      {
+        "pagePath": "pages/homework/homework",
+        "text": "作业",
+        "iconPath": "images/homework.png",
+        "selectedIconPath": "images/homework_selected.png"
+      },
+      {
+        "pagePath": "pages/analysis/analysis",
+        "text": "分析",
+        "iconPath": "images/analysis.png",
+        "selectedIconPath": "images/analysis_selected.png"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "设置",
+        "iconPath": "images/settings.png",
+        "selectedIconPath": "images/settings_selected.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userInfo": {
+      "desc": "您的信息将用于用户身份验证"
+    },
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于提供相关服务"
+    }
+  },
+  "requiredBackgroundModes": ["audio"]
+}

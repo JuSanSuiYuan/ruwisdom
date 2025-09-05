@@ -1,0 +1,120 @@
+<!-- 心理咨询师详情页面 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="goBack"></view>
+    <view class="nav-title">医生详情</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 医生基本信息 -->
+  <view class="doctor-info">
+    <view class="doctor-avatar">
+      <image src="{{psychologist.avatar || '/images/default_psychologist.png'}}" mode="aspectFit"></image>
+    </view>
+    <view class="doctor-basic">
+      <view class="doctor-name">
+        {{psychologist.name}}
+        <text class="doctor-title">{{psychologist.title}}</text>
+      </view>
+      <view class="doctor-hospital">{{psychologist.hospital}} · {{psychologist.department}}</view>
+      <view class="doctor-available">
+        <text class="available-text">{{psychologist.available ? '今日可预约' : '今日已满'}}</text>
+        <text class="price-text">¥{{psychologist.price}}/次</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 医生详细介绍 -->
+  <view class="doctor-details">
+    <view class="detail-section">
+      <view class="section-title">医生简介</view>
+      <view class="section-content">
+        {{psychologist.bio || '暂无简介信息'}}
+      </view>
+    </view>
+
+    <view class="detail-section">
+      <view class="section-title">擅长领域</view>
+      <view class="section-content">
+        {{psychologist.specialty || '暂无擅长领域信息'}}
+      </view>
+    </view>
+
+    <view class="detail-section">
+      <view class="section-title">执业资质</view>
+      <view class="section-content">
+        执业证书编号：{{psychologist.certificateNumber || '暂无资质信息'}}
+      </view>
+    </view>
+
+    <view class="detail-section">
+      <view class="section-title">工作时间</view>
+      <view class="section-content">
+        <view class="time-slots">
+          <view class="time-slot" wx:for="{{psychologist.availableTimeSlots}}" wx:key="index">
+            {{item}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预约信息 -->
+  <view class="appointment-section">
+    <view class="section-title">预约信息</view>
+    
+    <view class="appointment-item">
+      <view class="item-label">预约日期</view>
+      <view class="item-content">
+        <picker mode="date" start="{{minDate}}" end="{{maxDate}}" value="{{appointmentDate}}" bindchange="onDateChange">
+          <view class="picker">
+            {{appointmentDate || '请选择预约日期'}}
+            <image src="/images/arrow_down.png" mode="aspectFit" class="arrow-icon"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="appointment-item">
+      <view class="item-label">预约时间</view>
+      <view class="item-content">
+        <picker mode="selector" range="{{timeOptions}}" bindchange="onTimeChange" value="{{selectedTimeIndex}}" disabled="{{!appointmentDate}}">
+          <view class="picker">
+            {{selectedTimeIndex !== null ? timeOptions[selectedTimeIndex] : '请先选择预约日期'}}
+            <image src="/images/arrow_down.png" mode="aspectFit" class="arrow-icon"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="appointment-item">
+      <view class="item-label">咨询方式</view>
+      <view class="item-content">
+        <radio-group bindchange="onConsultMethodChange">
+          <label class="radio-label">
+            <radio value="offline" checked="{{consultMethod === 'offline'}}"/> 线下咨询
+          </label>
+          <label class="radio-label">
+            <radio value="online" checked="{{consultMethod === 'online'}}"/> 线上咨询
+          </label>
+        </radio-group>
+      </view>
+    </view>
+
+    <view class="appointment-item">
+      <view class="item-label">症状描述</view>
+      <view class="item-content">
+        <textarea placeholder="请简要描述您的症状或问题..." value="{{symptoms}}" bindinput="onSymptomsChange" class="symptoms-input"></textarea>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预约按钮 -->
+  <view class="appointment-btn-container">
+    <button type="primary" bindtap="submitAppointment" disabled="{{!appointmentDate || selectedTimeIndex === null || loading}}" class="appointment-btn">
+      {{loading ? '预约中...' : '立即预约'}}
+    </button>
+  </view>
+</view>

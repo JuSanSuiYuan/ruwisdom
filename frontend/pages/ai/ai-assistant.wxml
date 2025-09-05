@@ -1,0 +1,145 @@
+<!-- AI助手页面 -->
+<view class="ai-assistant-container">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <text class="title">AI助手</text>
+    <view class="header-actions">
+      <button class="clear-btn" bindtap="clearChatHistory">清空对话</button>
+      <button class="settings-btn" bindtap="openSettings">设置</button>
+    </view>
+  </view>
+
+  <!-- 模型选择区域 -->
+  <view class="model-selector">
+    <view class="model-selector-header">
+      <text class="model-label">选择AI模型：</text>
+      <view class="model-dropdown" bindtap="toggleModelDropdown">
+        <text class="selected-model">{{selectedModel.name}}</text>
+        <view class="dropdown-icon">{{modelDropdownVisible ? '▲' : '▼'}}</view>
+      </view>
+    </view>
+    
+    <!-- 模型下拉菜单 -->
+    <view class="model-dropdown-menu" wx:if="{{modelDropdownVisible}}">
+      <view class="model-item" wx:for="{{availableModels}}" wx:key="key" 
+            bindtap="selectModel" data-model-key="{{item.key}}">
+        <text class="model-name">{{item.name}}</text>
+        <text class="model-key">{{item.key}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 聊天内容区域 -->
+  <scroll-view class="chat-container" scroll-y="true" scroll-into-view="{{scrollToMessage}}" 
+               bindscrolltoupper="onScrollToUpper" bindscrolltolower="onScrollToLower">
+    <!-- 欢迎消息 -->
+    <view wx:if="{{messages.length === 0}}" class="welcome-message">
+      <text class="welcome-text">欢迎使用AI助手！请选择一个模型并输入您的问题。</text>
+    </view>
+    
+    <!-- 聊天记录 -->
+    <view class="message-list">
+      <!-- 用户消息 -->
+      <view wx:for="{{messages}}" wx:key="index" 
+            class="message-wrapper" id="message-{{index}}">
+        <view wx:if="{{item.role === 'user'}}" class="message user-message">
+          <view class="message-avatar">
+            <text class="avatar-text">用户</text>
+          </view>
+          <view class="message-content">
+            <text class="message-text">{{item.content}}</text>
+          </view>
+        </view>
+        
+        <!-- AI消息 -->
+        <view wx:else class="message ai-message">
+          <view class="message-avatar">
+            <text class="avatar-text">{{selectedModel.name}}</text>
+          </view>
+          <view class="message-content">
+            <text class="message-text">{{item.content}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 加载中提示 -->
+      <view wx:if="{{isLoading}}" class="loading-message">
+        <view class="loading-spinner"></view>
+        <text class="loading-text">AI正在思考...</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="input-container">
+    <textarea class="message-input" placeholder="请输入您的问题..." 
+              value="{{inputMessage}}" bindinput="onInputChange" 
+              bindconfirm="sendMessage" auto-height="true" 
+              maxlength="2000"></textarea>
+    <button class="send-btn" bindtap="sendMessage" disabled="{{!inputMessage.trim() || isLoading}}">
+      发送
+    </button>
+  </view>
+
+  <!-- 设置弹窗 -->
+  <view wx:if="{{showSettings}}" class="modal-overlay" bindtap="closeSettings">
+    <view class="modal-content" bindtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">AI助手设置</text>
+        <button class="close-btn" bindtap="closeSettings">×</button>
+      </view>
+      <view class="modal-body">
+        <view class="setting-item">
+          <text class="setting-label">温度值（0-2）：</text>
+          <slider min="0" max="2" step="0.1" value="{{temperature}}" bindchange="onTemperatureChange" />
+          <text class="setting-value">{{temperature}}</text>
+        </view>
+        <view class="setting-item">
+          <text class="setting-label">最大响应长度：</text>
+          <input class="setting-input" type="number" value="{{maxTokens}}" bindinput="onMaxTokensChange" />
+        </view>
+        <view class="setting-item">
+          <text class="setting-label">模型测试：</text>
+          <button class="test-btn" bindtap="testModels">测试所有模型</button>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="save-btn" bindtap="saveSettings">保存设置</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 模型测试结果弹窗 -->
+  <view wx:if="{{showTestResults}}" class="modal-overlay" bindtap="closeTestResults">
+    <view class="modal-content large" bindtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">模型测试结果</text>
+        <button class="close-btn" bindtap="closeTestResults">×</button>
+      </view>
+      <view class="modal-body">
+        <scroll-view class="test-results-container" scroll-y="true">
+          <view wx:for="{{testResults}}" wx:key="modelKey" class="test-result-item">
+            <view class="test-result-header">
+              <text class="test-result-name">{{item.name}}</text>
+              <view class="test-result-status" 
+                    class="{{item.success ? 'success' : 'error'}}">
+                {{item.success ? '成功' : '失败'}}
+              </view>
+            </view>
+            <view wx:if="{{item.success}}" class="test-result-response">
+              <text class="response-text">{{item.response.content || '响应成功'}}</text>
+            </view>
+            <view wx:else class="test-result-error">
+              <text class="error-text">{{item.error}}</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提示消息 -->
+  <view wx:if="{{showToast}}" class="toast">
+    <text class="toast-text">{{toastMessage}}</text>
+  </view>
+</view>

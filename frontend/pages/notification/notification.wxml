@@ -1,0 +1,63 @@
+<!-- 通知中心页面 -->
+<view class="notification-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-title">通知中心</view>
+  </view>
+
+  <!-- 标签页切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" data-index="0" bindtap="onTabChange">全部</view>
+    <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" data-index="1" bindtap="onTabChange">系统通知</view>
+    <view class="tab-item {{activeTab === 2 ? 'active' : ''}}" data-index="2" bindtap="onTabChange">课程通知</view>
+    <view class="tab-item {{activeTab === 3 ? 'active' : ''}}" data-index="3" bindtap="onTabChange">作业通知</view>
+  </view>
+
+  <!-- 通知列表 -->
+  <view class="notification-list">
+    <!-- 加载中状态 -->
+    <view class="loading-state" wx:if="{{isLoading && notifications.length === 0}}">
+      <view class="loading-spinner"></view>
+      <text>加载中...</text>
+    </view>
+
+    <!-- 通知列表内容 -->
+    <view wx:elif="{{notifications.length > 0}}">
+      <view class="notification-item {{item.isRead ? 'read' : 'unread'}}" wx:for="{{notifications}}" wx:key="id" data-id="{{item.id}}" bindtap="onNotificationClick">
+        <!-- 未读状态指示器 -->
+        <view class="unread-indicator" wx:if="{{!item.isRead}}"></view>
+        
+        <!-- 通知内容 -->
+        <view class="notification-content">
+          <!-- 通知标题和时间 -->
+          <view class="notification-header">
+            <text class="notification-title">{{item.title}}</text>
+            <text class="notification-time">{{item.time}}</text>
+          </view>
+          
+          <!-- 通知摘要 -->
+          <text class="notification-summary">{{item.content}}</text>
+          
+          <!-- 课程调整信息（如果有） -->
+          <view class="course-info" wx:if="{{item.courseInfo}}">
+            <text class="course-info-label" wx:if="{{item.courseInfo.originalCourse}}">原课程：{{item.courseInfo.originalCourse}} ({{item.courseInfo.originalTime}})</text>
+            <text class="course-info-label" wx:if="{{item.courseInfo.newCourse}}">新时间：{{item.courseInfo.newTime}}</text>
+            <text class="course-info-label" wx:if="{{item.courseInfo.affectedDays}}">影响日期：{{item.courseInfo.affectedDays}}</text>
+            <text class="course-info-label" wx:if="{{item.courseInfo.originalTeacher}}">原教师：{{item.courseInfo.originalTeacher}} → 代课教师：{{item.courseInfo.substituteTeacher}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:else>
+      <image src="/images/empty-notification.png" mode="aspectFit"></image>
+      <text>暂无通知</text>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore && !isLoading && notifications.length > 0}}">
+    <text>上拉加载更多</text>
+  </view>
+</view>

@@ -1,0 +1,82 @@
+<!-- 请假辅助页面 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="goBack"></view>
+    <view class="nav-title">请假辅助</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 页面说明 -->
+  <view class="page-intro">
+    <text class="intro-text">为请假学生提供便捷的出行和就医服务</text>
+  </view>
+
+  <!-- 请假信息 -->
+  <view class="leave-info-section">
+    <view class="section-title">请假信息</view>
+    <view class="leave-info-form">
+      <view class="form-item">
+        <view class="form-label">请假学生</view>
+        <view class="form-value">{{studentName || '请选择学生'}}
+          <image src="/images/arrow_right.png" mode="aspectFit" class="arrow-icon" bindtap="selectStudent"></image>
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="form-label">请假时间</view>
+        <view class="form-value">{{leaveTime || '请选择时间'}}
+          <image src="/images/arrow_right.png" mode="aspectFit" class="arrow-icon" bindtap="selectLeaveTime"></image>
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="form-label">请假原因</view>
+        <view class="form-value">{{leaveReason || '请选择原因'}}
+          <image src="/images/arrow_right.png" mode="aspectFit" class="arrow-icon" bindtap="selectLeaveReason"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 服务选择 -->
+  <view class="service-section">
+    <view class="section-title">服务选择</view>
+    <view class="service-list">
+      <view class="service-item" bindtap="navigateToTrainBooking">
+        <view class="service-icon train-icon"></view>
+        <view class="service-content">
+          <view class="service-title">高铁预约</view>
+          <view class="service-desc">帮助预订往返学校的高铁票</view>
+        </view>
+        <view class="service-arrow"></view>
+      </view>
+      <view class="service-item" bindtap="navigateToHotelBooking">
+        <view class="service-icon hotel-icon"></view>
+        <view class="service-content">
+          <view class="service-title">酒店预订</view>
+          <view class="service-desc">帮助预订就医期间的住宿</view>
+        </view>
+        <view class="service-arrow"></view>
+      </view>
+      <view class="service-item" bindtap="navigateToDoctorBooking">
+        <view class="service-icon doctor-icon"></view>
+        <view class="service-content">
+          <view class="service-title">医生预约</view>
+          <view class="service-desc">帮助预约相关专科医生</view>
+        </view>
+        <view class="service-arrow"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 温馨提示 -->
+  <view class="tips-section">
+    <view class="section-title">温馨提示</view>
+    <view class="tips-content">
+      <text class="tip-item">• 请确保填写真实准确的请假信息</text>
+      <text class="tip-item">• 高铁票和酒店预订需提前至少24小时</text>
+      <text class="tip-item">• 医生预约请提供详细的症状描述</text>
+      <text class="tip-item">• 如有疑问，请联系班主任或学校医务室</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,149 @@
+/* 请假申请列表页面样式 */
+
+.container {
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.header {
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.filter-bar {
+  display: flex;
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 10rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.filter-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 32rpx;
+  color: #666;
+  border-radius: 8rpx;
+}
+
+.filter-item.active {
+  background-color: #1aad19;
+  color: #fff;
+}
+
+.leave-list {
+  margin-bottom: 40rpx;
+}
+
+.leave-item {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.leave-type {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.status {
+  font-size: 28rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-approved {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.item-content {
+  margin-bottom: 20rpx;
+}
+
+.date-range {
+  display: block;
+  font-size: 30rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.reason {
+  display: block;
+  font-size: 32rpx;
+  color: #333;
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+.item-footer {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.apply-time {
+  display: block;
+  margin-bottom: 6rpx;
+}
+
+.approved-by {
+  display: block;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+}
+
+.empty-text {
+  display: block;
+  font-size: 32rpx;
+  margin-bottom: 30rpx;
+}
+
+.create-btn {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #1aad19;
+  color: #fff;
+  border-radius: 8rpx;
+  font-size: 34rpx;
+}
+
+.loading {
+  text-align: center;
+  padding: 30rpx 0;
+  color: #999;
+  font-size: 30rpx;
+}

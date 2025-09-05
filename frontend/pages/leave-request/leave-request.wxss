@@ -1,0 +1,93 @@
+/* 请假申请页面样式 */
+
+.container {
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.header {
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-container {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.form-item {
+  margin-bottom: 40rpx;
+}
+
+.label {
+  display: block;
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.required {
+  color: #e64340;
+}
+
+.picker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  background-color: #fff;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.icon-arrow-right {
+  color: #ccc;
+  font-size: 28rpx;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 200rpx;
+  padding: 20rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #333;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.count {
+  display: block;
+  text-align: right;
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+.submit-btn {
+  margin-top: 40rpx;
+  background-color: #1aad19;
+  color: #fff;
+  border-radius: 8rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+  padding: 20rpx 0;
+}
+
+.submit-btn[disabled] {
+  background-color: #ccc;
+  color: #fff;
+}

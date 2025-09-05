@@ -1,0 +1,44 @@
+<!-- 摄像头监控列表页面 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-title">摄像头监控</view>
+  </view>
+
+  <!-- 页面主体内容 -->
+  <view class="content">
+    <!-- 加载中状态 -->
+    <view wx:if="{{loading}}" class="loading-container">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 摄像头列表 -->
+    <view wx:else-if="{{cameras.length > 0}}" class="camera-list">
+      <view wx:for="{{cameras}}" wx:key="cameraId" class="camera-item" bindtap="viewCamera" data-id="{{item.cameraId}}">
+        <view class="camera-info">
+          <view class="camera-name">{{item.name}}</view>
+          <view class="camera-location">{{item.location}}</view>
+          <view class="camera-status" wx:if="{{item.status === 'online'}}" style="color: #07c160;">在线</view>
+          <view class="camera-status" wx:else style="color: #e64340;">离线</view>
+        </view>
+        <view class="camera-icon">
+          <image src="/images/camera.png" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:else class="empty-container">
+      <image src="/images/no_camera.png" mode="aspectFit" class="empty-image"></image>
+      <text class="empty-text">暂无可访问的摄像头</text>
+      <text class="empty-subtext">请联系管理员获取访问权限</text>
+    </view>
+  </view>
+
+  <!-- 错误提示弹窗 -->
+  <view wx:if="{{error}}" class="toast-error">
+    {{error}}
+  </view>
+</view>

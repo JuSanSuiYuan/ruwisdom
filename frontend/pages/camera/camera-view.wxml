@@ -1,0 +1,100 @@
+<!-- 摄像头监控视图页面 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="goBack"></view>
+    <view class="nav-title">{{camera.name || '摄像头监控'}}</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 页面主体内容 -->
+  <view class="content">
+    <!-- 视频播放区域 -->
+    <view class="video-container">
+      <view wx:if="{{loading}}" class="video-loading">
+        <view class="loading-spinner"></view>
+        <text class="loading-text">加载视频流...</text>
+      </view>
+      
+      <!-- 视频播放器 -->
+      <video 
+        wx:else 
+        id="cameraStream"
+        src="{{camera.streamUrl}}"
+        autoplay
+        controls
+        show-center-play-btn="true"
+        object-fit="contain"
+        binderror="videoError"
+        class="video-player"
+      ></video>
+    </view>
+
+    <!-- 摄像头信息 -->
+    <view class="camera-info">
+      <view class="info-item">
+        <text class="info-label">位置：</text>
+        <text class="info-value">{{camera.location || '未知位置'}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">状态：</text>
+        <text class="info-value" wx:if="{{camera.status === 'online'}}" style="color: #07c160;">在线</text>
+        <text class="info-value" wx:else style="color: #e64340;">离线</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">分辨率：</text>
+        <text class="info-value">{{camera.resolution || '未知'}}</text>
+      </view>
+    </view>
+
+    <!-- 控制面板 -->
+    <view class="control-panel">
+      <!-- 云台控制（仅当摄像头支持云台时显示） -->
+      <view wx:if="{{camera.supportsPTZ}}" class="ptz-controls">
+        <view class="ptz-row">
+          <view class="ptz-empty"></view>
+          <button class="ptz-btn" type="primary" bindtap="controlPTZ" data-action="up">↑</button>
+          <view class="ptz-empty"></view>
+        </view>
+        <view class="ptz-row">
+          <button class="ptz-btn" type="primary" bindtap="controlPTZ" data-action="left">←</button>
+          <button class="ptz-btn" type="primary" bindtap="controlPTZ" data-action="center">中</button>
+          <button class="ptz-btn" type="primary" bindtap="controlPTZ" data-action="right">→</button>
+        </view>
+        <view class="ptz-row">
+          <view class="ptz-empty"></view>
+          <button class="ptz-btn" type="primary" bindtap="controlPTZ" data-action="down">↓</button>
+          <view class="ptz-empty"></view>
+        </view>
+      </view>
+
+      <!-- 录制控制（仅当摄像头支持录制时显示） -->
+      <view wx:if="{{camera.supportsRecording}}" class="recording-controls">
+        <button 
+          wx:if="{{!isRecording}}" 
+          type="warn" 
+          bindtap="startRecording" 
+          class="record-btn"
+          loading="{{recordingLoading}}"
+        >
+          开始录制
+        </button>
+        <button 
+          wx:else 
+          type="default" 
+          bindtap="stopRecording" 
+          class="record-btn stop"
+          loading="{{recordingLoading}}"
+        >
+          停止录制 ({{recordingTime}}s)
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 错误提示弹窗 -->
+  <view wx:if="{{error}}" class="toast-error">
+    {{error}}
+  </view>
+</view>

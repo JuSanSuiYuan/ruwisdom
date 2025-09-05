@@ -1,0 +1,431 @@
+/* 公告管理页面样式 */
+.announcement-management-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* 顶部导航栏 */
+.top-nav {
+  background-color: #1989fa;
+  color: white;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.nav-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* 搜索和操作区 */
+.search-and-actions {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.search-bar {
+  flex: 1;
+  position: relative;
+  margin-right: 10px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 32px 8px 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.search-icon image {
+  width: 16px;
+  height: 16px;
+}
+
+.add-button {
+  background-color: #1989fa;
+  color: white;
+  border-radius: 20px;
+  font-size: 14px;
+  padding: 0 16px;
+  margin: 0;
+}
+
+/* 筛选条件 */
+.filter-section {
+  padding: 0 10px 10px;
+  display: flex;
+  background-color: white;
+  border-top: 1px solid #f0f0f0;
+}
+
+.filter-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.filter-label {
+  font-size: 14px;
+  color: #666;
+  margin-right: 8px;
+}
+
+.filter-picker {
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-size: 14px;
+}
+
+.filter-picker image {
+  width: 12px;
+  height: 12px;
+  margin-left: 4px;
+}
+
+/* 公告列表 */
+.announcement-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.announcement-item {
+  background-color: white;
+  padding: 16px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.announcement-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.announcement-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.announcement-status {
+  font-size: 12px;
+  color: #1989fa;
+  background-color: #e8f4ff;
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.announcement-status.draft {
+  color: #ff9800;
+  background-color: #fff8e1;
+}
+
+.announcement-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #999;
+}
+
+.announcement-type {
+  margin-right: 16px;
+  padding: 2px 8px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.announcement-content {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  word-break: break-all;
+}
+
+.announcement-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-button,
+.publish-button,
+.delete-button {
+  font-size: 13px;
+  margin-left: 8px;
+  padding: 0 12px;
+  min-width: 60px;
+  line-height: 32px;
+}
+
+.edit-button {
+  color: #1989fa;
+  background-color: transparent;
+}
+
+.publish-button {
+  color: #52c41a;
+  background-color: transparent;
+}
+
+.delete-button {
+  color: #ff4d4f;
+  background-color: transparent;
+}
+
+/* 无数据提示 */
+.no-announcements {
+  padding: 60px 0;
+  text-align: center;
+  color: #999;
+}
+
+/* 分页控件 */
+.pagination {
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #f0f0f0;
+}
+
+.pagination-info {
+  text-align: center;
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 10px;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.page-btn {
+  margin: 0 8px;
+  padding: 0 16px;
+  font-size: 14px;
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+.page-btn[disabled] {
+  opacity: 0.5;
+}
+
+/* 弹窗样式 */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.dialog {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border-radius: 16px 16px 0 0;
+  z-index: 1001;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dialog-header text {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.close-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-icon image {
+  width: 16px;
+  height: 16px;
+}
+
+.dialog-content {
+  padding: 16px;
+}
+
+.form-item {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.form-item input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.form-item textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 15px;
+  min-height: 120px;
+}
+
+.form-picker {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #333;
+}
+
+.form-picker image {
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+}
+
+.scope-checkboxes {
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+.checkbox-item checkbox {
+  margin-right: 6px;
+}
+
+.action-radio {
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+.radio-item radio {
+  margin-right: 6px;
+}
+
+.dialog-footer {
+  display: flex;
+  padding: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.cancel-btn,
+.confirm-btn {
+  flex: 1;
+  margin: 0 8px;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.cancel-btn {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.confirm-btn {
+  background-color: #1989fa;
+  color: white;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .search-and-actions {
+    flex-direction: column;
+  }
+  
+  .search-bar {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .filter-section {
+    flex-direction: column;
+  }
+  
+  .filter-item {
+    margin-bottom: 8px;
+  }
+  
+  .announcement-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .announcement-status {
+    margin-top: 8px;
+  }
+  
+  .announcement-actions {
+    flex-wrap: wrap;
+  }
+  
+  .edit-button,
+  .publish-button,
+  .delete-button {
+    margin-bottom: 8px;
+  }
+}

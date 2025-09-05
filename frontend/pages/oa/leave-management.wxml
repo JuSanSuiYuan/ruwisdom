@@ -1,0 +1,177 @@
+<!-- 请假管理页面 -->
+<view class="leave-management-container">
+  <!-- 顶部导航栏 -->
+  <view class="top-nav">
+    <view class="nav-title">请假管理</view>
+  </view>
+
+  <!-- 筛选条件 -->
+  <view class="filter-section">
+    <view class="filter-item">
+      <text class="filter-label">申请人类型:</text>
+      <picker range="['全部', '教师', '学生']" value="{{applicantTypeIndex}}" bindchange="onApplicantTypeChange">
+        <view class="filter-picker">
+          <text>{{['全部', '教师', '学生'][applicantTypeIndex]}}</text>
+          <image src="/images/arrow-down.png"></image>
+        </view>
+      </picker>
+    </view>
+    <view class="filter-item">
+      <text class="filter-label">请假状态:</text>
+      <picker range="['全部', '待审批', '已批准', '已拒绝']" value="{{statusIndex}}" bindchange="onStatusChange">
+        <view class="filter-picker">
+          <text>{{['全部', '待审批', '已批准', '已拒绝'][statusIndex]}}</text>
+          <image src="/images/arrow-down.png"></image>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 搜索和操作区 -->
+  <view class="search-and-actions">
+    <view class="search-bar">
+      <input type="text" placeholder="搜索申请人姓名" bindinput="onSearchInput" value="{{searchKeyword}}" />
+      <view class="search-icon">
+        <image src="/images/search.png"></image>
+      </view>
+    </view>
+    <view class="date-range">
+      <text class="date-label">时间范围:</text>
+      <view class="date-picker">
+        <text>{{startDate || '开始日期'}}</text>
+        <text>-</text>
+        <text>{{endDate || '结束日期'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 请假列表 -->
+  <view class="leave-list">
+    <view wx:if="leaveRequests.length > 0">
+      <view wx:for="{{leaveRequests}}" wx:key="id" class="leave-item">
+        <view class="leave-header">
+          <text class="leave-applicant">{{item.applicantName}} ({{item.applicantRole === 'teacher' ? '教师' : '学生'}})</text>
+          <text class="leave-status">{{getStatusText(item.status)}}</text>
+        </view>
+        <view class="leave-info">
+          <view class="info-item">
+            <text class="info-label">请假类型:</text>
+            <text class="info-value">{{item.leaveType}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-label">请假时间:</text>
+            <text class="info-value">{{item.startDate}} 至 {{item.endDate}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-label">请假天数:</text>
+            <text class="info-value">{{item.days}} 天</text>
+          </view>
+        </view>
+        <view class="leave-reason">
+          <text class="reason-label">请假原因:</text>
+          <text class="reason-content">{{item.reason}}</text>
+        </view>
+        <view wx:if="item.approverName" class="leave-approval">
+          <text class="approval-label">审批人:</text>
+          <text class="approval-info">{{item.approverName}} ({{item.approvalTime}})</text>
+          <text wx:if="item.approvalComment" class="approval-comment">{{item.approvalComment}}</text>
+        </view>
+        <view wx:if="item.status === 'pending'" class="leave-actions">
+          <button class="approve-button" bindtap="approveLeave" data-id="{{item.id}}">批准</button>
+          <button class="reject-button" bindtap="showRejectDialog" data-id="{{item.id}}">拒绝</button>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="no-leaves">
+      <text>暂无请假申请</text>
+    </view>
+  </view>
+
+  <!-- 分页控件 -->
+  <view class="pagination" wx:if="leaveRequests.length > 0">
+    <view class="pagination-info">
+      <text>共 {{totalCount}} 条，第 {{currentPage}}/{{totalPages}} 页</text>
+    </view>
+    <view class="pagination-controls">
+      <button class="page-btn" disabled="{{currentPage === 1}}" bindtap="prevPage">上一页</button>
+      <button class="page-btn" disabled="{{currentPage === totalPages}}" bindtap="nextPage">下一页</button>
+    </view>
+  </view>
+
+  <!-- 拒绝请假弹窗 -->
+  <view class="dialog-overlay" wx:if="showRejectDialog" bindtap="hideRejectDialog"></view>
+  <view class="dialog" wx:if="showRejectDialog">
+    <view class="dialog-header">
+      <text>拒绝请假</text>
+      <view class="close-icon" bindtap="hideRejectDialog">
+        <image src="/images/close.png"></image>
+      </view>
+    </view>
+    <view class="dialog-content">
+      <view class="form-item">
+        <text class="form-label">拒绝原因 *</text>
+        <textarea placeholder="请输入拒绝原因" value="{{rejectReason}}" bindinput="onRejectReasonInput" auto-height="true" />
+      </view>
+    </view>
+    <view class="dialog-footer">
+      <button class="cancel-btn" bindtap="hideRejectDialog">取消</button>
+      <button class="reject-confirm-btn" bindtap="confirmReject">确认拒绝</button>
+    </view>
+  </view>
+
+  <!-- 查看详情弹窗 -->
+  <view class="dialog-overlay" wx:if="showDetailDialog" bindtap="hideDetailDialog"></view>
+  <view class="dialog detail-dialog" wx:if="showDetailDialog">
+    <view class="dialog-header">
+      <text>请假详情</text>
+      <view class="close-icon" bindtap="hideDetailDialog">
+        <image src="/images/close.png"></image>
+      </view>
+    </view>
+    <view class="dialog-content">
+      <view class="detail-item">
+        <text class="detail-label">申请人:</text>
+        <text class="detail-value">{{detailData.applicantName}} ({{detailData.applicantRole === 'teacher' ? '教师' : '学生'}})</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">请假类型:</text>
+        <text class="detail-value">{{detailData.leaveType}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">开始日期:</text>
+        <text class="detail-value">{{detailData.startDate}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">结束日期:</text>
+        <text class="detail-value">{{detailData.endDate}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">请假天数:</text>
+        <text class="detail-value">{{detailData.days}} 天</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">请假原因:</text>
+        <text class="detail-value reason">{{detailData.reason}}</text>
+      </view>
+      <view wx:if="detailData.submitTime" class="detail-item">
+        <text class="detail-label">提交时间:</text>
+        <text class="detail-value">{{detailData.submitTime}}</text>
+      </view>
+      <view wx:if="detailData.approverName" class="detail-item">
+        <text class="detail-label">审批人:</text>
+        <text class="detail-value">{{detailData.approverName}}</text>
+      </view>
+      <view wx:if="detailData.approvalTime" class="detail-item">
+        <text class="detail-label">审批时间:</text>
+        <text class="detail-value">{{detailData.approvalTime}}</text>
+      </view>
+      <view wx:if="detailData.approvalComment" class="detail-item">
+        <text class="detail-label">审批意见:</text>
+        <text class="detail-value comment">{{detailData.approvalComment}}</text>
+      </view>
+    </view>
+    <view class="dialog-footer">
+      <button class="cancel-btn" bindtap="hideDetailDialog">关闭</button>
+    </view>
+  </view>
+</view>

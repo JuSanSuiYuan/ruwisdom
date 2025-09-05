@@ -1,0 +1,396 @@
+/* 请假管理页面样式 */
+.leave-management-container {
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 顶部导航栏 */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.nav-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 筛选条件区域 */
+.filter-section {
+  background-color: #fff;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.filter-item {
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.filter-item:last-child {
+  margin-right: 0;
+}
+
+.filter-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.filter-select {
+  width: 100%;
+  height: 70rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+
+/* 搜索和时间范围选择区 */
+.search-section {
+  background-color: #fff;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.search-input {
+  width: 100%;
+  height: 80rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.date-range {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-item {
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.date-item:last-child {
+  margin-right: 0;
+}
+
+.date-picker {
+  width: 100%;
+  height: 70rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  background-color: #fff;
+}
+
+/* 请假列表 */
+.leave-list {
+  background-color: #fff;
+  border-radius: 10rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.leave-item {
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.leave-item:last-child {
+  border-bottom: none;
+}
+
+.leave-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.leave-applicant {
+  display: flex;
+  align-items: center;
+}
+
+.applicant-avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 15rpx;
+}
+
+.applicant-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.applicant-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.applicant-role {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.leave-type {
+  font-size: 28rpx;
+  color: #666;
+  padding: 6rpx 16rpx;
+  background-color: #f0f0f0;
+  border-radius: 16rpx;
+}
+
+.leave-body {
+  margin-bottom: 15rpx;
+}
+
+.leave-time {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.leave-days {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.leave-reason {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 40rpx;
+}
+
+.leave-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leave-status {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #ff9800;
+}
+
+.status-approved {
+  color: #4caf50;
+}
+
+.status-rejected {
+  color: #f44336;
+}
+
+.leave-actions {
+  display: flex;
+}
+
+.action-btn {
+  padding: 8rpx 24rpx;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  margin-left: 15rpx;
+}
+
+.approve-btn {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.reject-btn {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.view-btn {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+/* 分页控件 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30rpx;
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.pagination-btn {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  margin: 0 10rpx;
+  font-size: 28rpx;
+}
+
+.pagination-info {
+  font-size: 28rpx;
+  color: #666;
+  margin: 0 20rpx;
+}
+
+/* 弹窗样式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  width: 80%;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #e0e0e0;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-close {
+  font-size: 40rpx;
+  color: #999;
+}
+
+.modal-body {
+  margin-bottom: 30rpx;
+}
+
+.detail-item {
+  margin-bottom: 20rpx;
+}
+
+.detail-label {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.detail-value {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 40rpx;
+}
+
+.reject-reason-input {
+  width: 100%;
+  height: 180rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-action-btn {
+  padding: 15rpx 40rpx;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+}
+
+.cancel-btn {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+.confirm-btn {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+/* 无数据提示 */
+.no-data {
+  text-align: center;
+  padding: 100rpx 20rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 响应式调整 */
+@media (max-width: 768rpx) {
+  .filter-row {
+    flex-direction: column;
+  }
+  
+  .filter-item {
+    margin-right: 0;
+    margin-bottom: 20rpx;
+  }
+  
+  .date-range {
+    flex-direction: column;
+  }
+  
+  .date-item {
+    margin-right: 0;
+    margin-bottom: 20rpx;
+  }
+  
+  .modal-content {
+    width: 90%;
+  }
+}

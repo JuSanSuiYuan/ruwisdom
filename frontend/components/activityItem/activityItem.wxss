@@ -1,0 +1,49 @@
+/* 活动项组件样式 */
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-icon {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  margin-right: 20rpx;
+}
+
+.icon-image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.icon-text {
+  font-size: 30rpx;
+  color: #1890ff;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-title {
+  font-size: 28rpx;
+  color: #333333;
+  display: block;
+}
+
+.activity-time {
+  font-size: 22rpx;
+  color: #999999;
+  margin-top: 6rpx;
+  display: block;
+}

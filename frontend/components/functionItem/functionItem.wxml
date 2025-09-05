@@ -1,0 +1,8 @@
+<!-- 功能项组件 -->
+<view class="function-item" bindtap="onItemClick" data-id="{{id}}">
+  <view class="function-icon" style="background-color: {{bgColor || '#f0f5ff'}};">
+    <image wx:if="{{icon}}" src="{{icon}}" class="icon-image"></image>
+    <text wx:else class="icon-text">{{iconText || '📱'}}</text>
+  </view>
+  <text class="function-name">{{name}}</text>
+</view>

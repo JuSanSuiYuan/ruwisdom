@@ -1,0 +1,205 @@
+/* 心理安慰页面样式 */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  height: 44px;
+  background-color: #1aad19;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  position: relative;
+}
+
+.nav-back {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-back::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  transform: rotate(-45deg);
+}
+
+.nav-title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-right {
+  width: 44px;
+}
+
+/* 聊天内容区域 */
+.chat-container {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 消息项 */
+.message-item {
+  display: flex;
+  align-items: flex-start;
+  max-width: 80%;
+}
+
+.message-item.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.message-item.system {
+  align-self: center;
+  max-width: 90%;
+}
+
+/* 头像 */
+.message-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 10px;
+  background-color: #f0f0f0;
+}
+
+.message-avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 消息内容 */
+.message-content {
+  flex: 1;
+}
+
+.message-text {
+  padding: 10px 15px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.message-item.user .message-text {
+  background-color: #91d5ff;
+  color: #333;
+  border-bottom-right-radius: 6px;
+}
+
+.message-item.ai .message-text,
+.message-item.system .message-text {
+  background-color: white;
+  color: #333;
+  border-bottom-left-radius: 6px;
+}
+
+/* 消息时间 */
+.message-time {
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* 加载中状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #1aad19;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 5px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: #666;
+  font-size: 14px;
+}
+
+/* 输入区域 */
+.input-container {
+  display: flex;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #eee;
+}
+
+.text-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 15px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 15px;
+  background-color: #f8f8f8;
+}
+
+.send-btn {
+  margin-left: 10px;
+  height: 40px;
+  min-width: 80px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 40px;
+  padding: 0;
+}
+
+/* 快捷问题区域 */
+.quick-questions {
+  padding: 10px 15px;
+  background-color: white;
+  border-top: 1px solid #eee;
+}
+
+.quick-title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quick-buttons button {
+  font-size: 13px;
+}

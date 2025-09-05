@@ -1,0 +1,147 @@
+<!-- 公告管理页面 -->
+<view class="announcement-management-container">
+  <!-- 顶部导航栏 -->
+  <view class="top-nav">
+    <view class="nav-title">公告管理</view>
+  </view>
+
+  <!-- 搜索和操作区 -->
+  <view class="search-and-actions">
+    <view class="search-bar">
+      <input type="text" placeholder="搜索公告标题" bindinput="onSearchInput" value="{{searchKeyword}}" />
+      <view class="search-icon">
+        <image src="/images/search.png"></image>
+      </view>
+    </view>
+    <button class="add-button" bindtap="showAddAnnouncementDialog">发布公告</button>
+  </view>
+
+  <!-- 筛选条件 -->
+  <view class="filter-section">
+    <view class="filter-item">
+      <text class="filter-label">公告类型:</text>
+      <picker range="['全部', '系统公告', '学校通知', '活动通知', '其他']" value="{{typeIndex}}" bindchange="onTypeChange">
+        <view class="filter-picker">
+          <text>{{['全部', '系统公告', '学校通知', '活动通知', '其他'][typeIndex]}}</text>
+          <image src="/images/arrow-down.png"></image>
+        </view>
+      </picker>
+    </view>
+    <view class="filter-item">
+      <text class="filter-label">发布状态:</text>
+      <picker range="['全部', '已发布', '草稿']" value="{{statusIndex}}" bindchange="onStatusChange">
+        <view class="filter-picker">
+          <text>{{['全部', '已发布', '草稿'][statusIndex]}}</text>
+          <image src="/images/arrow-down.png"></image>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 公告列表 -->
+  <view class="announcement-list">
+    <view wx:if="announcements.length > 0">
+      <view wx:for="{{announcements}}" wx:key="id" class="announcement-item">
+        <view class="announcement-header">
+          <text class="announcement-title">{{item.title}}</text>
+          <text class="announcement-status" wx:if="item.status === 'published'">{{item.publishDate}}</text>
+          <text class="announcement-status draft" wx:else>草稿</text>
+        </view>
+        <view class="announcement-meta">
+          <text class="announcement-type">{{item.type}}</text>
+          <text class="announcement-author">发布人: {{item.author}}</text>
+        </view>
+        <view class="announcement-content">
+          <text>{{item.content}}</text>
+        </view>
+        <view class="announcement-actions">
+          <button class="edit-button" bindtap="editAnnouncement" data-id="{{item.id}}">编辑</button>
+          <button wx:if="item.status === 'draft'" class="publish-button" bindtap="publishAnnouncement" data-id="{{item.id}}">发布</button>
+          <button class="delete-button" bindtap="deleteAnnouncement" data-id="{{item.id}}" open-type="confirm">删除</button>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="no-announcements">
+      <text>暂无公告</text>
+    </view>
+  </view>
+
+  <!-- 分页控件 -->
+  <view class="pagination" wx:if="announcements.length > 0">
+    <view class="pagination-info">
+      <text>共 {{totalCount}} 条，第 {{currentPage}}/{{totalPages}} 页</text>
+    </view>
+    <view class="pagination-controls">
+      <button class="page-btn" disabled="{{currentPage === 1}}" bindtap="prevPage">上一页</button>
+      <button class="page-btn" disabled="{{currentPage === totalPages}}" bindtap="nextPage">下一页</button>
+    </view>
+  </view>
+
+  <!-- 公告编辑/发布弹窗 -->
+  <view class="dialog-overlay" wx:if="showDialog" bindtap="hideDialog"></view>
+  <view class="dialog" wx:if="showDialog">
+    <view class="dialog-header">
+      <text>{{editingAnnouncement ? '编辑公告' : '发布公告'}}</text>
+      <view class="close-icon" bindtap="hideDialog">
+        <image src="/images/close.png"></image>
+      </view>
+    </view>
+    <view class="dialog-content">
+      <view class="form-item">
+        <text class="form-label">公告标题 *</text>
+        <input type="text" placeholder="请输入公告标题" value="{{currentAnnouncement.title}}" bindinput="onTitleInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">公告类型 *</text>
+        <picker range="['系统公告', '学校通知', '活动通知', '其他']" value="{{currentAnnouncement.typeIndex}}" bindchange="onAnnouncementTypeChange">
+          <view class="form-picker">
+            <text>{{['系统公告', '学校通知', '活动通知', '其他'][currentAnnouncement.typeIndex] || '请选择'}}</text>
+            <image src="/images/arrow-down.png"></image>
+          </view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="form-label">公告内容 *</text>
+        <textarea placeholder="请输入公告内容" value="{{currentAnnouncement.content}}" bindinput="onContentInput" auto-height="true" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">发布范围</text>
+        <view class="scope-checkboxes">
+          <checkbox-group bindchange="onScopeChange">
+            <label class="checkbox-item">
+              <checkbox value="student" checked="{{currentAnnouncement.scope.includes('student')}}" />
+              <text>学生</text>
+            </label>
+            <label class="checkbox-item">
+              <checkbox value="teacher" checked="{{currentAnnouncement.scope.includes('teacher')}}" />
+              <text>教师</text>
+            </label>
+            <label class="checkbox-item">
+              <checkbox value="parent" checked="{{currentAnnouncement.scope.includes('parent')}}" />
+              <text>家长</text>
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="form-item" wx:if="!editingAnnouncement || currentAnnouncement.status === 'draft'">
+        <text class="form-label">操作选择</text>
+        <view class="action-radio">
+          <radio-group bindchange="onActionChange">
+            <label class="radio-item">
+              <radio value="publish" checked="{{currentAction === 'publish'}}" />
+              <text>立即发布</text>
+            </label>
+            <label class="radio-item">
+              <radio value="save" checked="{{currentAction === 'save'}}" />
+              <text>保存为草稿</text>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+    </view>
+    <view class="dialog-footer">
+      <button class="cancel-btn" bindtap="hideDialog">取消</button>
+      <button class="confirm-btn" bindtap="saveAnnouncement">{{editingAnnouncement ? '保存修改' : '确定'}}</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+<!-- 活动项组件 -->
+<view class="activity-item" bindtap="onItemClick" data-id="{{id}}">
+  <view class="activity-icon" style="background-color: {{iconBgColor || '#f0f5ff'}};">
+    <image wx:if="{{icon}}" src="{{icon}}" class="icon-image"></image>
+    <text wx:else class="icon-text">{{iconText || '📋'}}</text>
+  </view>
+  <view class="activity-content">
+    <text class="activity-title">{{title}}</text>
+    <text class="activity-time">{{time}}</text>
+  </view>
+</view>

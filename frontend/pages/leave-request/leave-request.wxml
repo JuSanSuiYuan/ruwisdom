@@ -1,0 +1,65 @@
+<!-- 请假申请页面 -->
+<view class="container">
+  <view class="header">
+    <text class="title">请假申请</text>
+  </view>
+  
+  <view class="form-container">
+    <!-- 请假类型 -->
+    <view class="form-item">
+      <text class="label">请假类型 <text class="required">*</text></text>
+      <picker bindchange="onLeaveTypeChange" value="{{leaveTypeIndex}}" range="{{leaveTypes}}">
+        <view class="picker">
+          {{leaveTypes[leaveTypeIndex] || '请选择请假类型'}}
+          <text class="icon-arrow-right"></text>
+        </view>
+      </picker>
+    </view>
+    
+    <!-- 开始日期 -->
+    <view class="form-item">
+      <text class="label">开始日期 <text class="required">*</text></text>
+      <picker mode="date" bindchange="onStartDateChange" value="{{startDate}}" start="{{today}}" end="{{maxDate}}">
+        <view class="picker">
+          {{startDate || '请选择开始日期'}}
+          <text class="icon-arrow-right"></text>
+        </view>
+      </picker>
+    </view>
+    
+    <!-- 结束日期 -->
+    <view class="form-item">
+      <text class="label">结束日期 <text class="required">*</text></text>
+      <picker mode="date" bindchange="onEndDateChange" value="{{endDate}}" start="{{startDate || today}}" end="{{maxDate}}">
+        <view class="picker">
+          {{endDate || '请选择结束日期'}}
+          <text class="icon-arrow-right"></text>
+        </view>
+      </picker>
+    </view>
+    
+    <!-- 请假原因 -->
+    <view class="form-item">
+      <text class="label">请假原因 <text class="required">*</text></text>
+      <textarea 
+        class="textarea" 
+        placeholder="请详细说明请假原因" 
+        bindinput="onReasonInput" 
+        value="{{reason}}" 
+        maxlength="500"
+        auto-height
+      ></textarea>
+      <text class="count">{{reason.length}}/500</text>
+    </view>
+    
+    <!-- 提交按钮 -->
+    <button 
+      class="submit-btn" 
+      bindtap="submitLeaveRequest" 
+      disabled="{{!canSubmit}}"
+      loading="{{submitting}}"
+    >
+      提交申请
+    </button>
+  </view>
+</view>

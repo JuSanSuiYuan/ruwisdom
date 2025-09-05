@@ -1,0 +1,78 @@
+<!-- 我的预约页面 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="goBack"></view>
+    <view class="nav-title">我的预约</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 预约状态筛选 -->
+  <view class="filter-tabs">
+    <view class="tab-item {{activeTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">全部</view>
+    <view class="tab-item {{activeTab === 'pending' ? 'active' : ''}}" bindtap="switchTab" data-tab="pending">待就诊</view>
+    <view class="tab-item {{activeTab === 'completed' ? 'active' : ''}}" bindtap="switchTab" data-tab="completed">已完成</view>
+    <view class="tab-item {{activeTab === 'canceled' ? 'active' : ''}}" bindtap="switchTab" data-tab="canceled">已取消</view>
+  </view>
+
+  <!-- 预约列表 -->
+  <view class="appointment-list">
+    <block wx:if="{{appointments.length > 0}}">
+      <view class="appointment-item" wx:for="{{appointments}}" wx:key="_id">
+        <!-- 预约基本信息 -->
+        <view class="appointment-header">
+          <view class="appointment-title">
+            <text class="doctor-name">{{item.psychologistName}}</text>
+            <text class="appointment-status {{getStatusClass(item.status)}}">{{getStatusText(item.status)}}</text>
+          </view>
+          <view class="appointment-date">{{item.date}} {{item.time}}</view>
+        </view>
+
+        <!-- 预约详情 -->
+        <view class="appointment-details">
+          <view class="detail-row">
+            <text class="detail-label">医院：</text>
+            <text class="detail-value">{{item.hospital}}</text>
+          </view>
+          <view class="detail-row">
+            <text class="detail-label">科室：</text>
+            <text class="detail-value">{{item.department}}</text>
+          </view>
+          <view class="detail-row">
+            <text class="detail-label">咨询方式：</text>
+            <text class="detail-value">{{item.consultMethod === 'offline' ? '线下咨询' : '线上咨询'}}</text>
+          </view>
+          <view class="detail-row" wx:if="{{item.symptoms}}">
+            <text class="detail-label">症状描述：</text>
+            <text class="detail-value">{{item.symptoms}}</text>
+          </view>
+        </view>
+
+        <!-- 操作按钮 -->
+        <view class="appointment-actions">
+          <block wx:if="{{item.status === 'pending'}}">
+            <button type="default" size="mini" bindtap="cancelAppointment" data-id="{{item._id}}" class="action-btn cancel-btn">取消预约</button>
+            <button type="primary" size="mini" bindtap="goToConsultation" data-id="{{item._id}}" class="action-btn consult-btn">前往就诊</button>
+          </block>
+          <block wx:elif="{{item.status === 'completed'}}">
+            <button type="default" size="mini" bindtap="viewConsultationRecord" data-id="{{item._id}}" class="action-btn record-btn">查看记录</button>
+          </block>
+          <block wx:else>
+            <button type="default" size="mini" bindtap="rescheduleAppointment" data-id="{{item._id}}" class="action-btn reschedule-btn">重新预约</button>
+          </block>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="empty-state">
+      <image src="/images/empty_appointment.png" mode="aspectFit" class="empty-image"></image>
+      <text class="empty-text">暂无预约记录</text>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+</view>

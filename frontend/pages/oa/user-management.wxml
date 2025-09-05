@@ -1,0 +1,122 @@
+<!-- 用户管理页面 -->
+<view class="user-management-container">
+  <!-- 顶部导航栏 -->
+  <view class="top-nav">
+    <view class="nav-title">用户管理</view>
+    <view class="nav-actions">
+      <view class="search-icon" bindtap="showSearch">
+        <image src="/images/search.png"></image>
+      </view>
+      <view class="add-icon" bindtap="showAddUserDialog">
+        <image src="/images/add.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 筛选条件 -->
+  <view class="filter-section">
+    <view class="filter-tabs">
+      <view class="filter-tab {{activeFilter === 'all' ? 'active' : ''}}" bindtap="setFilter" data-filter="all">全部</view>
+      <view class="filter-tab {{activeFilter === 'student' ? 'active' : ''}}" bindtap="setFilter" data-filter="student">学生</view>
+      <view class="filter-tab {{activeFilter === 'teacher' ? 'active' : ''}}" bindtap="setFilter" data-filter="teacher">教师</view>
+      <view class="filter-tab {{activeFilter === 'parent' ? 'active' : ''}}" bindtap="setFilter" data-filter="parent">家长</view>
+      <view class="filter-tab {{activeFilter === 'admin' ? 'active' : ''}}" bindtap="setFilter" data-filter="admin">管理员</view>
+    </view>
+    <view class="status-filter">
+      <picker bindchange="setStatusFilter" value="{{statusIndex}}" range="{{statusOptions}}">
+        <view class="status-picker">
+          <text>{{statusOptions[statusIndex]}}</text>
+          <image src="/images/arrow-down.png"></image>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 用户列表 -->
+  <view class="user-list">
+    <view wx:if="users.length > 0" class="user-items">
+      <view wx:for="{{users}}" wx:key="id" class="user-item">
+        <view class="user-info">
+          <image class="user-avatar" src="{{item.avatar || '/images/default-avatar.png'}}"></image>
+          <view class="user-details">
+            <view class="user-name-role">
+              <text class="user-name">{{item.name}}</text>
+              <text class="user-role-tag">{{item.roleName}}</text>
+            </view>
+            <text class="user-account">账号：{{item.account}}</text>
+            <text class="user-phone">电话：{{item.phone || '未设置'}}</text>
+          </view>
+        </view>
+        <view class="user-actions">
+          <view class="status-badge {{item.status === 'active' ? 'active' : item.status === 'inactive' ? 'inactive' : 'suspended'}}">{{item.statusName}}</view>
+          <view class="action-buttons">
+            <button class="edit-button" bindtap="editUser" data-id="{{item.id}}">编辑</button>
+            <button class="delete-button" bindtap="deleteUser" data-id="{{item.id}}" open-type="confirm">删除</button>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="no-users">
+      <image src="/images/empty.png"></image>
+      <text>暂无用户数据</text>
+    </view>
+  </view>
+
+  <!-- 分页 -->
+  <view wx:if="users.length > 0" class="pagination">
+    <view class="page-info">共 {{total}} 条，第 {{currentPage}}/{{totalPages}} 页</view>
+    <view class="page-buttons">
+      <button class="page-btn" bindtap="prevPage" disabled="{{currentPage === 1}}">上一页</button>
+      <button class="page-btn" bindtap="nextPage" disabled="{{currentPage === totalPages}}">下一页</button>
+    </view>
+  </view>
+
+  <!-- 搜索框 (默认隐藏) -->
+  <view class="search-bar" wx:if="showSearchBar">
+    <input type="text" placeholder="搜索用户名或账号" value="{{searchKeyword}}" bindinput="onSearchInput" bindconfirm="onSearch" />
+    <button class="search-button" bindtap="onSearch">搜索</button>
+    <button class="cancel-button" bindtap="hideSearch">取消</button>
+  </view>
+
+  <!-- 添加用户弹窗 (默认隐藏) -->
+  <view class="dialog-overlay" wx:if="showAddDialog" bindtap="hideAddUserDialog"></view>
+  <view class="dialog" wx:if="showAddDialog">
+    <view class="dialog-header">
+      <text>添加用户</text>
+      <view class="close-icon" bindtap="hideAddUserDialog">
+        <image src="/images/close.png"></image>
+      </view>
+    </view>
+    <view class="dialog-content">
+      <view class="form-item">
+        <text class="form-label">用户名</text>
+        <input type="text" placeholder="请输入用户名" value="{{newUser.name}}" bindinput="onNameInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">账号</text>
+        <input type="text" placeholder="请输入账号" value="{{newUser.account}}" bindinput="onAccountInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">密码</text>
+        <input type="password" placeholder="请输入密码" value="{{newUser.password}}" bindinput="onPasswordInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">角色</text>
+        <picker bindchange="onRoleChange" value="{{newUser.roleIndex}}" range="{{roleOptions}}">
+          <view class="picker-view">
+            <text>{{roleOptions[newUser.roleIndex] || '请选择角色'}}</text>
+            <image src="/images/arrow-down.png"></image>
+          </view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="form-label">电话</text>
+        <input type="number" placeholder="请输入电话" value="{{newUser.phone}}" bindinput="onPhoneInput" />
+      </view>
+    </view>
+    <view class="dialog-footer">
+      <button class="cancel-btn" bindtap="hideAddUserDialog">取消</button>
+      <button class="confirm-btn" bindtap="confirmAddUser">确认添加</button>
+    </view>
+  </view>
+</view>

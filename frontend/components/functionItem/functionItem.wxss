@@ -1,0 +1,42 @@
+/* 功能项组件样式 */
+.function-item {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.function-icon {
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20rpx;
+  margin-bottom: 10rpx;
+  font-size: 50rpx;
+}
+
+.icon-image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.icon-text {
+  font-size: 50rpx;
+  color: #1890ff;
+}
+
+.function-name {
+  font-size: 24rpx;
+  color: #333333;
+  margin-top: 10rpx;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 320px) {
+  .function-item {
+    width: 33.33%;
+  }
+}

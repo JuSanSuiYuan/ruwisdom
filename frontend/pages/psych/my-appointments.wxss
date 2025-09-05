@@ -1,0 +1,252 @@
+/* 我的预约页面样式 */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  height: 44px;
+  background-color: #1aad19;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  position: relative;
+}
+
+.nav-back {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-back::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  transform: rotate(-45deg);
+}
+
+.nav-title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-right {
+  width: 44px;
+}
+
+/* 预约状态筛选标签 */
+.filter-tabs {
+  display: flex;
+  background-color: white;
+  border-bottom: 1px solid #eee;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  color: #666;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #1aad19;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background-color: #1aad19;
+  border-radius: 3px;
+}
+
+/* 预约列表 */
+.appointment-list {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* 预约列表项 */
+.appointment-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 预约头部信息 */
+.appointment-header {
+  margin-bottom: 15px;
+}
+
+.appointment-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.doctor-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.appointment-status {
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.appointment-status.pending {
+  background-color: rgba(255, 165, 0, 0.1);
+  color: #ffa500;
+}
+
+.appointment-status.completed {
+  background-color: rgba(26, 173, 25, 0.1);
+  color: #1aad19;
+}
+
+.appointment-status.canceled {
+  background-color: rgba(153, 153, 153, 0.1);
+  color: #999;
+}
+
+.appointment-date {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 预约详情 */
+.appointment-details {
+  margin-bottom: 15px;
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  color: #999;
+  margin-right: 10px;
+  min-width: 70px;
+}
+
+.detail-value {
+  color: #666;
+  flex: 1;
+}
+
+/* 操作按钮 */
+.appointment-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.action-btn {
+  font-size: 13px;
+  padding: 0 15px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.cancel-btn {
+  background-color: #f8f8f8;
+  color: #666;
+}
+
+.consult-btn {
+  background-color: #1aad19;
+  color: white;
+}
+
+.record-btn {
+  background-color: #f8f8f8;
+  color: #666;
+}
+
+.reschedule-btn {
+  background-color: #f8f8f8;
+  color: #666;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  color: #999;
+}
+
+.empty-image {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.empty-text {
+  font-size: 15px;
+}
+
+/* 加载状态 */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #999;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #1aad19;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading text {
+  font-size: 14px;
+}

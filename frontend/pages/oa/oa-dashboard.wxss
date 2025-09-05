@@ -1,0 +1,189 @@
+/* OA管理仪表盘页面样式 */
+
+.oa-dashboard-container {
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 顶部导航栏 */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding-left: 30rpx;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.user-role {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.top-actions {
+  display: flex;
+  padding-right: 30rpx;
+}
+
+.settings-icon,
+.logout-icon {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 40rpx;
+}
+
+.settings-icon image,
+.logout-icon image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+/* 数据概览区域 */
+.stats-section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+}
+
+.section-title text {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.section-title .more {
+  font-size: 28rpx;
+  color: #1aad19;
+}
+
+.stats-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* 快捷功能区域 */
+.quick-functions {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.functions-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.function-item {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+  background-color: #fafafa;
+  border-radius: 10rpx;
+}
+
+.function-icon {
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 15rpx;
+}
+
+.user-icon {
+  background-color: #e6f7ff;
+}
+
+.system-icon {
+  background-color: #fff2e8;
+}
+
+.announcement-icon {
+  background-color: #f6ffed;
+}
+
+.leave-icon {
+  background-color: #f9f0ff;
+}
+
+.function-icon image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.function-name {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 最近操作区域 */
+.activities-section {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.activities-list {
+  max-height: 400rpx;
+  overflow-y: auto;
+}
+
+.no-activities {
+  text-align: center;
+  color: #999;
+  padding: 40rpx;
+  font-size: 28rpx;
+}
+
+/* 响应式调整 */
+@media (max-width: 320px) {
+  .function-item {
+    width: 100%;
+  }
+}

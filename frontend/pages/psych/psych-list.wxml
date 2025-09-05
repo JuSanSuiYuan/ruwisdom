@@ -1,0 +1,58 @@
+<!-- 心理咨询师列表页面 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="goBack"></view>
+    <view class="nav-title">预约心理医生</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-container">
+    <input type="text" placeholder="搜索心理咨询师..." bindinput="onSearchInput" value="{{searchKeyword}}" class="search-input"/>
+    <view class="search-icon"></view>
+  </view>
+
+  <!-- 筛选条件 -->
+  <view class="filter-container">
+    <view class="filter-item {{selectedHospital === 'all' ? 'active' : ''}}" bindtap="filterByHospital" data-hospital="all">全部医院</view>
+    <view class="filter-item {{selectedHospital === hospital ? 'active' : ''}}" wx:for="{{hospitals}}" wx:key="index" bindtap="filterByHospital" data-hospital="{{item}}">{{item}}</view>
+  </view>
+
+  <!-- 心理咨询师列表 -->
+  <view class="psychologist-list">
+    <block wx:if="{{psychologists.length > 0}}">
+      <view class="psychologist-item" wx:for="{{psychologists}}" wx:key="id" bindtap="viewPsychologistDetail" data-id="{{item._id}}">
+        <view class="psychologist-avatar">
+          <image src="{{item.avatar || '/images/default_psychologist.png'}}" mode="aspectFit"></image>
+        </view>
+        <view class="psychologist-info">
+          <view class="psychologist-name">{{item.name}} <text class="psychologist-title">{{item.title}}</text></view>
+          <view class="psychologist-hospital">{{item.hospital}} · {{item.department}}</view>
+          <view class="psychologist-specialty">擅长：{{item.specialty}}</view>
+          <view class="psychologist-available">
+            <text class="available-text">今日{{item.available ? '可预约' : '已满'}}</text>
+            <text class="price-text">¥{{item.price}}/次</text>
+          </view>
+        </view>
+        <view class="arrow-icon"></view>
+      </view>
+    </block>
+    <view wx:else class="empty-state">
+      <image src="/images/empty.png" mode="aspectFit" class="empty-image"></image>
+      <text class="empty-text">暂无符合条件的心理咨询师</text>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">
+    <text>上拉加载更多</text>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+</view>

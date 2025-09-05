@@ -1,0 +1,250 @@
+/* 心理咨询师列表页面样式 */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  height: 44px;
+  background-color: #1aad19;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  position: relative;
+}
+
+.nav-back {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-back::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  transform: rotate(-45deg);
+}
+
+.nav-title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-right {
+  width: 44px;
+}
+
+/* 搜索框 */
+.search-container {
+  padding: 10px;
+  background-color: white;
+  position: relative;
+}
+
+.search-input {
+  height: 40px;
+  padding: 0 40px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 15px;
+  background-color: #f8f8f8;
+}
+
+.search-icon {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20'%3E%3Cpath fill='%23999' d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* 筛选条件 */
+.filter-container {
+  display: flex;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.filter-item {
+  padding: 5px 15px;
+  margin-right: 10px;
+  border-radius: 15px;
+  font-size: 14px;
+  color: #666;
+  background-color: #f0f0f0;
+}
+
+.filter-item.active {
+  color: white;
+  background-color: #1aad19;
+}
+
+/* 心理咨询师列表 */
+.psychologist-list {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* 心理咨询师列表项 */
+.psychologist-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.psychologist-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  margin-right: 15px;
+}
+
+.psychologist-avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.psychologist-info {
+  flex: 1;
+}
+
+.psychologist-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.psychologist-title {
+  font-size: 12px;
+  color: #1aad19;
+  background-color: rgba(26, 173, 25, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.psychologist-hospital {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.psychologist-specialty {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.psychologist-available {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.available-text {
+  font-size: 13px;
+  color: #1aad19;
+}
+
+.price-text {
+  font-size: 14px;
+  color: #e64340;
+  font-weight: bold;
+}
+
+.arrow-icon {
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='20' height='20'%3E%3Cpath fill='%23ccc' d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0;
+  color: #999;
+}
+
+.empty-image {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+.empty-text {
+  font-size: 15px;
+}
+
+/* 加载更多 */
+.load-more {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+}
+
+/* 加载状态 */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #999;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #1aad19;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading text {
+  font-size: 14px;
+}

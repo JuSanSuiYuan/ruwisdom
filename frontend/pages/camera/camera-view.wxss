@@ -1,0 +1,199 @@
+/* 摄像头监控视图页面样式 */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  height: 44px;
+  background-color: #1aad19;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  position: relative;
+}
+
+.nav-back {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-back::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  transform: rotate(-45deg);
+}
+
+.nav-title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-right {
+  width: 44px;
+}
+
+/* 页面主体内容 */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 视频播放区域 */
+.video-container {
+  flex: 1;
+  background-color: #000;
+  position: relative;
+  min-height: 300px;
+}
+
+/* 视频加载中状态 */
+.video-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #1aad19;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: white;
+  font-size: 14px;
+}
+
+/* 视频播放器 */
+.video-player {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+
+/* 摄像头信息 */
+.camera-info {
+  background-color: white;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  color: #666;
+  font-size: 14px;
+  min-width: 60px;
+}
+
+.info-value {
+  color: #333;
+  font-size: 14px;
+}
+
+/* 控制面板 */
+.control-panel {
+  background-color: white;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+/* 云台控制 */
+.ptz-controls {
+  margin-bottom: 20px;
+}
+
+.ptz-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.ptz-row:last-child {
+  margin-bottom: 0;
+}
+
+.ptz-btn {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  font-size: 20px;
+}
+
+.ptz-empty {
+  width: 60px;
+}
+
+/* 录制控制 */
+.recording-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.record-btn {
+  width: 200px;
+  height: 45px;
+  font-size: 16px;
+}
+
+.record-btn.stop {
+  background-color: #e64340;
+  color: white;
+}
+
+/* 错误提示 */
+.toast-error {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 9999;
+}

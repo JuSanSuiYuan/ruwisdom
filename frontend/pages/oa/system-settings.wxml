@@ -1,0 +1,219 @@
+<!-- 系统设置页面 -->
+<view class="system-settings-container">
+  <!-- 顶部导航栏 -->
+  <view class="top-nav">
+    <view class="nav-title">系统设置</view>
+  </view>
+
+  <!-- 设置选项卡 -->
+  <view class="settings-tabs">
+    <view class="tab {{activeTab === 'system' ? 'active' : ''}}" bindtap="setActiveTab" data-tab="system">系统配置</view>
+    <view class="tab {{activeTab === 'calendar' ? 'active' : ''}}" bindtap="setActiveTab" data-tab="calendar">校历管理</view>
+    <view class="tab {{activeTab === 'holiday' ? 'active' : ''}}" bindtap="setActiveTab" data-tab="holiday">假期安排</view>
+  </view>
+
+  <!-- 系统配置内容 -->
+  <view class="tab-content" wx:if="activeTab === 'system'">
+    <view class="setting-item">
+      <view class="setting-label">
+        <text>系统名称</text>
+      </view>
+      <view class="setting-value">
+        <input type="text" value="{{systemConfig.systemName}}" bindinput="onSystemNameInput" placeholder="请输入系统名称" />
+      </view>
+    </view>
+    <view class="setting-item">
+      <view class="setting-label">
+        <text>学校名称</text>
+      </view>
+      <view class="setting-value">
+        <input type="text" value="{{systemConfig.schoolName}}" bindinput="onSchoolNameInput" placeholder="请输入学校名称" />
+      </view>
+    </view>
+    <view class="setting-item">
+      <view class="setting-label">
+        <text>当前学期</text>
+      </view>
+      <view class="setting-value">
+        <input type="text" value="{{systemConfig.currentTerm}}" bindinput="onCurrentTermInput" placeholder="请输入当前学期" />
+      </view>
+    </view>
+    <view class="setting-item">
+      <view class="setting-label">
+        <text>开学日期</text>
+      </view>
+      <view class="setting-value">
+        <picker mode="date" value="{{systemConfig.startDate}}" bindchange="onStartDateChange">
+          <view class="date-picker">
+            <text>{{systemConfig.startDate || '请选择开学日期'}}</text>
+            <image src="/images/arrow-down.png"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="setting-item">
+      <view class="setting-label">
+        <text>学期结束日期</text>
+      </view>
+      <view class="setting-value">
+        <picker mode="date" value="{{systemConfig.endDate}}" bindchange="onEndDateChange">
+          <view class="date-picker">
+            <text>{{systemConfig.endDate || '请选择学期结束日期'}}</text>
+            <image src="/images/arrow-down.png"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="setting-item">
+      <view class="setting-label">
+        <text>每周上课天数</text>
+      </view>
+      <view class="setting-value">
+        <picker range="['5天', '6天', '7天']" value="{{systemConfig.workDaysIndex}}" bindchange="onWorkDaysChange">
+          <view class="picker-view">
+            <text>{{['5天', '6天', '7天'][systemConfig.workDaysIndex] || '请选择'}}</text>
+            <image src="/images/arrow-down.png"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="save-button-container">
+      <button class="save-button" bindtap="saveSystemConfig">保存配置</button>
+    </view>
+  </view>
+
+  <!-- 校历管理内容 -->
+  <view class="tab-content" wx:if="activeTab === 'calendar'">
+    <view class="calendar-actions">
+      <button class="add-button" bindtap="showAddCalendarDialog">添加校历事件</button>
+    </view>
+    <view class="calendar-list">
+      <view wx:if="calendarEvents.length > 0">
+        <view wx:for="{{calendarEvents}}" wx:key="id" class="calendar-item">
+          <view class="calendar-info">
+            <text class="calendar-title">{{item.title}}</text>
+            <text class="calendar-date">{{item.date}}</text>
+          </view>
+          <view class="calendar-actions">
+            <button class="edit-button" bindtap="editCalendarEvent" data-id="{{item.id}}">编辑</button>
+            <button class="delete-button" bindtap="deleteCalendarEvent" data-id="{{item.id}}" open-type="confirm">删除</button>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="no-events">
+        <text>暂无校历事件</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 假期安排内容 -->
+  <view class="tab-content" wx:if="activeTab === 'holiday'">
+    <view class="holiday-actions">
+      <button class="add-button" bindtap="showAddHolidayDialog">添加假期</button>
+    </view>
+    <view class="holiday-list">
+      <view wx:if="holidays.length > 0">
+        <view wx:for="{{holidays}}" wx:key="id" class="holiday-item">
+          <view class="holiday-info">
+            <text class="holiday-name">{{item.name}}</text>
+            <text class="holiday-period">{{item.startDate}} 至 {{item.endDate}}</text>
+            <text class="holiday-desc">{{item.description || '无描述'}}</text>
+          </view>
+          <view class="holiday-actions">
+            <button class="edit-button" bindtap="editHoliday" data-id="{{item.id}}">编辑</button>
+            <button class="delete-button" bindtap="deleteHoliday" data-id="{{item.id}}" open-type="confirm">删除</button>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="no-holidays">
+        <text>暂无假期安排</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 添加校历事件弹窗 -->
+  <view class="dialog-overlay" wx:if="showCalendarDialog" bindtap="hideCalendarDialog"></view>
+  <view class="dialog" wx:if="showCalendarDialog">
+    <view class="dialog-header">
+      <text>{{editingCalendarEvent ? '编辑校历事件' : '添加校历事件'}}</text>
+      <view class="close-icon" bindtap="hideCalendarDialog">
+        <image src="/images/close.png"></image>
+      </view>
+    </view>
+    <view class="dialog-content">
+      <view class="form-item">
+        <text class="form-label">事件名称</text>
+        <input type="text" placeholder="请输入事件名称" value="{{currentCalendarEvent.title}}" bindinput="onCalendarTitleInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">事件日期</text>
+        <picker mode="date" value="{{currentCalendarEvent.date}}" bindchange="onCalendarDateChange">
+          <view class="date-picker">
+            <text>{{currentCalendarEvent.date || '请选择日期'}}</text>
+            <image src="/images/arrow-down.png"></image>
+          </view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="form-label">事件类型</text>
+        <picker range="['重要日期', '考试', '假期', '活动', '其他']" value="{{currentCalendarEvent.typeIndex}}" bindchange="onCalendarTypeChange">
+          <view class="picker-view">
+            <text>{{['重要日期', '考试', '假期', '活动', '其他'][currentCalendarEvent.typeIndex] || '请选择'}}</text>
+            <image src="/images/arrow-down.png"></image>
+          </view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="form-label">描述</text>
+        <textarea placeholder="请输入事件描述" value="{{currentCalendarEvent.description}}" bindinput="onCalendarDescInput" auto-height="true" />
+      </view>
+    </view>
+    <view class="dialog-footer">
+      <button class="cancel-btn" bindtap="hideCalendarDialog">取消</button>
+      <button class="confirm-btn" bindtap="saveCalendarEvent">{{editingCalendarEvent ? '保存修改' : '添加'}}</button>
+    </view>
+  </view>
+
+  <!-- 添加假期弹窗 -->
+  <view class="dialog-overlay" wx:if="showHolidayDialog" bindtap="hideHolidayDialog"></view>
+  <view class="dialog" wx:if="showHolidayDialog">
+    <view class="dialog-header">
+      <text>{{editingHoliday ? '编辑假期' : '添加假期'}}</text>
+      <view class="close-icon" bindtap="hideHolidayDialog">
+        <image src="/images/close.png"></image>
+      </view>
+    </view>
+    <view class="dialog-content">
+      <view class="form-item">
+        <text class="form-label">假期名称</text>
+        <input type="text" placeholder="请输入假期名称" value="{{currentHoliday.name}}" bindinput="onHolidayNameInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">开始日期</text>
+        <picker mode="date" value="{{currentHoliday.startDate}}" bindchange="onHolidayStartDateChange">
+          <view class="date-picker">
+            <text>{{currentHoliday.startDate || '请选择开始日期'}}</text>
+            <image src="/images/arrow-down.png"></image>
+          </view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="form-label">结束日期</text>
+        <picker mode="date" value="{{currentHoliday.endDate}}" bindchange="onHolidayEndDateChange">
+          <view class="date-picker">
+            <text>{{currentHoliday.endDate || '请选择结束日期'}}</text>
+            <image src="/images/arrow-down.png"></image>
+          </view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="form-label">描述</text>
+        <textarea placeholder="请输入假期描述" value="{{currentHoliday.description}}" bindinput="onHolidayDescInput" auto-height="true" />
+      </view>
+    </view>
+    <view class="dialog-footer">
+      <button class="cancel-btn" bindtap="hideHolidayDialog">取消</button>
+      <button class="confirm-btn" bindtap="saveHoliday">{{editingHoliday ? '保存修改' : '添加'}}</button>
+    </view>
+  </view>
+</view>

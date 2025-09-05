@@ -1,0 +1,81 @@
+/* 心理咨询首页样式 */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  height: 44px;
+  background-color: #1aad19;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.nav-title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 页面主体内容 */
+.content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 功能卡片 */
+.card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f8ff;
+  border-radius: 50%;
+}
+
+.card-icon image {
+  width: 40px;
+  height: 40px;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: #666;
+}

@@ -1,0 +1,65 @@
+<!-- 请假申请详情页面 -->
+<view class="container">
+  <view class="header">
+    <text class="title">请假申请详情</text>
+  </view>
+  
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+  
+  <!-- 详情内容 -->
+  <view class="detail-container" wx:elif="{{leaveRequest}}">
+    <!-- 基本信息 -->
+    <view class="info-section">
+      <view class="info-item">
+        <text class="label">请假类型：</text>
+        <text class="value">{{leaveRequest.leaveType}}</text>
+      </view>
+      <view class="info-item">
+        <text class="label">请假时间：</text>
+        <text class="value">{{leaveRequest.startDate}} - {{leaveRequest.endDate}}</text>
+      </view>
+      <view class="info-item">
+        <text class="label">申请时间：</text>
+        <text class="value">{{leaveRequest.createdAt}}</text>
+      </view>
+      <view class="info-item">
+        <text class="label">状态：</text>
+        <text class="value status status-{{leaveRequest.status}}">{{getStatusText(leaveRequest.status)}}</text>
+      </view>
+    </view>
+    
+    <!-- 请假原因 -->
+    <view class="reason-section">
+      <text class="section-title">请假原因</text>
+      <text class="reason-content">{{leaveRequest.reason}}</text>
+    </view>
+    
+    <!-- 审批信息（如果已审批） -->
+    <view class="approval-section" wx:if="{{leaveRequest.status !== 'pending'}}">
+      <text class="section-title">审批信息</text>
+      <view class="info-item">
+        <text class="label">审批人：</text>
+        <text class="value">{{leaveRequest.approvedBy?.name || '系统'}}</text>
+      </view>
+      <view class="info-item" wx:if="{{leaveRequest.comments}}">
+        <text class="label">审批意见：</text>
+        <text class="value">{{leaveRequest.comments}}</text>
+      </view>
+    </view>
+    
+    <!-- 操作按钮 -->
+    <view class="action-buttons" wx:if="{{leaveRequest.status === 'pending'}}">
+      <button class="btn-edit" bindtap="onEdit">编辑申请</button>
+      <button class="btn-delete" bindtap="onDelete" type="warn">删除申请</button>
+    </view>
+  </view>
+  
+  <!-- 错误提示 -->
+  <view class="error-state" wx:else>
+    <text class="error-text">请假申请不存在</text>
+    <button class="back-btn" bindtap="navigateBack">返回</button>
+  </view>
+</view>

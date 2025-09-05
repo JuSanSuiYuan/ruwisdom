@@ -1,0 +1,293 @@
+/* 通知详情页面样式 */
+
+/* 容器样式 */
+.notification-detail-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部导航栏样式 */
+.nav-bar {
+  height: 44px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.nav-back {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-back text {
+  font-size: 18px;
+  color: #333;
+}
+
+.nav-title {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.nav-right {
+  width: 44px;
+}
+
+/* 详情内容滚动区域 */
+.detail-content {
+  flex: 1;
+  padding: 15px;
+}
+
+/* 通知头部样式 */
+.detail-header {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.detail-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.detail-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-type {
+  font-size: 12px;
+  color: #1aad19;
+  background-color: #e6f7ff;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.detail-time {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 通知内容样式 */
+.detail-body {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.detail-content-text {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* 课程信息区域样式 */
+.course-info-section,
+.homework-info-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.course-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.info-value {
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 附件区域样式 */
+.attachment-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.attachment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attachment-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.attachment-item:active {
+  background-color: #e8e8e8;
+}
+
+.attachment-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.attachment-name {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attachment-arrow {
+  font-size: 14px;
+  color: #999;
+}
+
+/* 操作按钮样式 */
+.action-buttons {
+  margin-bottom: 20px;
+}
+
+.action-btn {
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: #1aad19;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.action-btn:active {
+  background-color: #179b16;
+}
+
+/* 底部间距 */
+.bottom-spacing {
+  height: 30px;
+}
+
+/* 加载中状态样式 */
+.loading-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #1aad19;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-state text {
+  color: #999;
+  font-size: 14px;
+}
+
+/* 错误状态样式 */
+.error-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.error-state image {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 15px;
+  opacity: 0.5;
+}
+
+.error-state text {
+  color: #999;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background-color: #1aad19;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 15px;
+  width: 200px;
+}
+
+.back-btn:active {
+  background-color: #179b16;
+}
+
+/* 适配不同屏幕尺寸 */
+@media screen and (min-width: 768px) {
+  .notification-detail-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .course-info-grid {
+    grid-template-columns: 1fr;
+  }
+}

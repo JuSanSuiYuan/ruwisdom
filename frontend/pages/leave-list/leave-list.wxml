@@ -1,0 +1,73 @@
+<!-- 请假申请列表页面 -->
+<view class="container">
+  <view class="header">
+    <text class="title">我的请假申请</text>
+  </view>
+  
+  <!-- 状态筛选 -->
+  <view class="filter-bar">
+    <view 
+      class="filter-item {{currentStatus === '' ? 'active' : ''}}" 
+      bindtap="onStatusFilter" 
+      data-status=""
+    >
+      全部
+    </view>
+    <view 
+      class="filter-item {{currentStatus === 'pending' ? 'active' : ''}}" 
+      bindtap="onStatusFilter" 
+      data-status="pending"
+    >
+      待审批
+    </view>
+    <view 
+      class="filter-item {{currentStatus === 'approved' ? 'active' : ''}}" 
+      bindtap="onStatusFilter" 
+      data-status="approved"
+    >
+      已批准
+    </view>
+    <view 
+      class="filter-item {{currentStatus === 'rejected' ? 'active' : ''}}" 
+      bindtap="onStatusFilter" 
+      data-status="rejected"
+    >
+      已拒绝
+    </view>
+  </view>
+  
+  <!-- 请假申请列表 -->
+  <view class="leave-list">
+    <block wx:if="{{leaveRequests.length > 0}}">
+      <view class="leave-item" wx:for="{{leaveRequests}}" wx:key="_id" bindtap="onItemTap" data-id="{{item._id}}">
+        <view class="item-header">
+          <text class="leave-type">{{item.leaveType}}</text>
+          <text class="status status-{{item.status}}">{{getStatusText(item.status)}}</text>
+        </view>
+        <view class="item-content">
+          <text class="date-range">{{item.startDate}} - {{item.endDate}}</text>
+          <text class="reason">{{item.reason}}</text>
+        </view>
+        <view class="item-footer">
+          <text class="apply-time">申请时间：{{item.createdAt}}</text>
+          <block wx:if="{{item.status !== 'pending' && item.approvedBy}}">
+            <text class="approved-by">审批人：{{item.approvedBy.name}}</text>
+          </block>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:else>
+      <text class="empty-text">暂无请假申请记录</text>
+      <button class="create-btn" bindtap="navigateToCreate" type="primary">
+        新建请假申请
+      </button>
+    </view>
+  </view>
+  
+  <!-- 加载更多 -->
+  <view class="loading" wx:if="{{loading && leaveRequests.length > 0}}">
+    <text>加载中...</text>
+  </view>
+</view>

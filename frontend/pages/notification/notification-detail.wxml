@@ -1,0 +1,139 @@
+<!-- 通知详情页面 -->
+<view class="notification-detail-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onBackPress">
+      <text>◀</text>
+    </view>
+    <view class="nav-title">通知详情</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 通知详情内容 -->
+  <scroll-view scroll-y class="detail-content" wx:if="{{!isLoading && notificationDetail}}">
+    <!-- 通知头部 -->
+    <view class="detail-header">
+      <text class="detail-title">{{notificationDetail.title}}</text>
+      <view class="detail-meta">
+        <text class="detail-type">{{notificationDetail.typeName}}</text>
+        <text class="detail-time">{{notificationDetail.time}}</text>
+      </view>
+    </view>
+
+    <!-- 通知内容 -->
+    <view class="detail-body">
+      <text class="detail-content-text">{{notificationDetail.content}}</text>
+    </view>
+
+    <!-- 课程信息（如果有） -->
+    <view class="course-info-section" wx:if="{{notificationDetail.courseInfo}}">
+      <view class="section-title">课程详情</view>
+      <view class="course-info-grid">
+        <view class="info-item" wx:if="{{notificationDetail.courseInfo.originalCourse}}">
+          <text class="info-label">原课程：</text>
+          <text class="info-value">{{notificationDetail.courseInfo.originalCourse}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.courseInfo.originalTime}}">
+          <text class="info-label">原时间：</text>
+          <text class="info-value">{{notificationDetail.courseInfo.originalTime}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.courseInfo.newCourse}}">
+          <text class="info-label">新课程：</text>
+          <text class="info-value">{{notificationDetail.courseInfo.newCourse}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.courseInfo.newTime}}">
+          <text class="info-label">新时间：</text>
+          <text class="info-value">{{notificationDetail.courseInfo.newTime}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.courseInfo.teacher}}">
+          <text class="info-label">教师：</text>
+          <text class="info-value">{{notificationDetail.courseInfo.teacher}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.courseInfo.affectedDays}}">
+          <text class="info-label">影响日期：</text>
+          <text class="info-value">{{notificationDetail.courseInfo.affectedDays}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.courseInfo.originalTeacher}}">
+          <text class="info-label">原教师：</text>
+          <text class="info-value">{{notificationDetail.courseInfo.originalTeacher}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.courseInfo.substituteTeacher}}">
+          <text class="info-label">代课教师：</text>
+          <text class="info-value">{{notificationDetail.courseInfo.substituteTeacher}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.courseInfo.courseName}}">
+          <text class="info-label">课程名称：</text>
+          <text class="info-value">{{notificationDetail.courseInfo.courseName}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.courseInfo.reason}}">
+          <text class="info-label">变动原因：</text>
+          <text class="info-value">{{notificationDetail.courseInfo.reason}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 作业信息（如果有） -->
+    <view class="homework-info-section" wx:if="{{notificationDetail.homeworkInfo}}">
+      <view class="section-title">作业详情</view>
+      <view class="course-info-grid">
+        <view class="info-item" wx:if="{{notificationDetail.homeworkInfo.subject}}">
+          <text class="info-label">科目：</text>
+          <text class="info-value">{{notificationDetail.homeworkInfo.subject}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.homeworkInfo.deadline}}">
+          <text class="info-label">截止时间：</text>
+          <text class="info-value">{{notificationDetail.homeworkInfo.deadline}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.homeworkInfo.submitMethod}}">
+          <text class="info-label">提交方式：</text>
+          <text class="info-value">{{notificationDetail.homeworkInfo.submitMethod}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.homeworkInfo.score}}">
+          <text class="info-label">得分：</text>
+          <text class="info-value">{{notificationDetail.homeworkInfo.score}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.homeworkInfo.comment}}">
+          <text class="info-label">评语：</text>
+          <text class="info-value">{{notificationDetail.homeworkInfo.comment}}</text>
+        </view>
+        <view class="info-item" wx:if="{{notificationDetail.homeworkInfo.teacherName}}">
+          <text class="info-label">教师：</text>
+          <text class="info-value">{{notificationDetail.homeworkInfo.teacherName}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 附件列表（如果有） -->
+    <view class="attachment-section" wx:if="{{notificationDetail.attachments && notificationDetail.attachments.length > 0}}">
+      <view class="section-title">附件</view>
+      <view class="attachment-list">
+        <view class="attachment-item" wx:for="{{notificationDetail.attachments}}" wx:key="index" data-url="{{item.url}}" bindtap="openAttachment">
+          <view class="attachment-icon">📎</view>
+          <text class="attachment-name">{{item.name}}</text>
+          <view class="attachment-arrow">→</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 相关操作按钮 -->
+    <view class="action-buttons" wx:if="{{notificationDetail.relatedCourseUrl}}">
+      <button class="action-btn" type="primary" bindtap="viewRelatedCourse">查看相关课程表</button>
+    </view>
+
+    <!-- 底部间距 -->
+    <view class="bottom-spacing"></view>
+  </scroll-view>
+
+  <!-- 加载中状态 -->
+  <view class="loading-state" wx:elif="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+
+  <!-- 错误状态 -->
+  <view class="error-state" wx:else>
+    <image src="/images/error.png" mode="aspectFit"></image>
+    <text>通知不存在或已删除</text>
+    <button class="back-btn" bindtap="onBackPress">返回</button>
+  </view>
+</view>

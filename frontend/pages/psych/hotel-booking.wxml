@@ -1,0 +1,109 @@
+<!-- 酒店预订页面 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="goBack"></view>
+    <view class="nav-title">酒店预订</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 学生信息 -->
+  <view class="student-info">
+    <view class="info-item">
+      <text class="info-label">学生姓名：</text>
+      <text class="info-value">{{studentName}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">请假时间：</text>
+      <text class="info-value">{{leaveTime}}</text>
+    </view>
+  </view>
+
+  <!-- 酒店预订信息 -->
+  <view class="hotel-info">
+    <view class="section-title">酒店信息</view>
+    
+    <!-- 城市选择 -->
+    <view class="form-item">
+      <view class="form-label">城市</view>
+      <view class="form-value">
+        <picker mode="selector" range="{{cities}}" bindchange="onCityChange" value="{{cityIndex}}" disabled="{{loading}}">
+          <view class="picker">
+            {{cities[cityIndex] || '请选择城市'}}
+            <image src="/images/arrow_down.png" mode="aspectFit" class="arrow-icon"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 入住日期 -->
+    <view class="form-item">
+      <view class="form-label">入住日期</view>
+      <view class="form-value">
+        <picker mode="date" start="{{minDate}}" end="{{maxDate}}" value="{{checkinDate}}" bindchange="onCheckinDateChange" disabled="{{loading}}">
+          <view class="picker">
+            {{checkinDate || '请选择入住日期'}}
+            <image src="/images/arrow_down.png" mode="aspectFit" class="arrow-icon"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 离店日期 -->
+    <view class="form-item">
+      <view class="form-label">离店日期</view>
+      <view class="form-value">
+        <picker mode="date" start="{{checkinDate || minDate}}" end="{{maxDate}}" value="{{checkoutDate}}" bindchange="onCheckoutDateChange" disabled="{{loading}}">
+          <view class="picker">
+            {{checkoutDate || '请选择离店日期'}}
+            <image src="/images/arrow_down.png" mode="aspectFit" class="arrow-icon"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 入住人信息 -->
+    <view class="form-item">
+      <view class="form-label">入住人姓名</view>
+      <view class="form-value">
+        <input type="text" placeholder="请输入入住人姓名" value="{{guestName}}" bindinput="onGuestNameInput" disabled="{{loading}}" class="text-input"/>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">身份证号</view>
+      <view class="form-value">
+        <input type="text" placeholder="请输入入住人身份证号" value="{{idCard}}" bindinput="onIdCardInput" disabled="{{loading}}" class="text-input"/>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">联系电话</view>
+      <view class="form-value">
+        <input type="number" placeholder="请输入联系电话" value="{{phone}}" bindinput="onPhoneInput" disabled="{{loading}}" class="text-input"/>
+      </view>
+    </view>
+
+    <!-- 特殊要求 -->
+    <view class="form-item">
+      <view class="form-label">特殊要求</view>
+      <view class="form-value">
+        <textarea placeholder="如有特殊要求，请在此说明（如：靠近医院、高楼层等）" value="{{specialRequests}}" bindinput="onSpecialRequestsInput" disabled="{{loading}}" class="textarea-input"></textarea>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮 -->
+  <view class="action-buttons">
+    <button type="primary" bindtap="submitBooking" disabled="{{!canSubmit || loading}}" class="submit-btn">
+      {{loading ? '提交预订中...' : '提交预订'}}
+    </button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">正在加载...</text>
+  </view>
+</view>

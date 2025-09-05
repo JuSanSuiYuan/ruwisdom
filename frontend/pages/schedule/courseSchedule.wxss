@@ -1,0 +1,305 @@
+/* 课程表页面样式 */
+
+/* 容器样式 */
+.course-schedule-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部导航栏样式 */
+.nav-bar {
+  height: 44px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.nav-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 信息栏和周次选择器样式 */
+.info-bar {
+  padding: 10px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.student-info {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.student-info text {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.week-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.week-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 15px;
+}
+
+.week-btn:active {
+  background-color: #e0e0e0;
+}
+
+.week-btn.disabled {
+  opacity: 0.5;
+}
+
+.week-btn text {
+  font-size: 18px;
+  color: #333;
+}
+
+.week-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 课程表内容区域样式 */
+.schedule-content {
+  flex: 1;
+  overflow: hidden;
+  padding: 0 10px 10px;
+}
+
+/* 课程表表头样式 */
+.schedule-header {
+  display: flex;
+  background-color: #1aad19;
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.time-slot-header {
+  width: 70px;
+  padding: 10px 5px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  border-right: 1px solid #fff;
+}
+
+.weekday-header {
+  flex: 1;
+  padding: 10px 5px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  border-right: 1px solid #fff;
+}
+
+.weekday-header:last-child {
+  border-right: none;
+}
+
+/* 滚动区域样式 */
+.schedule-scroll {
+  height: calc(100% - 40px);
+  background-color: #fff;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+/* 课程表主体样式 */
+.schedule-body {
+  width: 100%;
+}
+
+.time-row {
+  display: flex;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.time-row:last-child {
+  border-bottom: none;
+}
+
+/* 时间列样式 */
+.time-slot {
+  width: 70px;
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #f0f0f0;
+  background-color: #fafafa;
+}
+
+.slot-index {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.slot-time {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* 课程列样式 */
+.course-column {
+  flex: 1;
+  border-right: 1px solid #f0f0f0;
+  min-height: 80px;
+}
+
+.course-column:last-child {
+  border-right: none;
+}
+
+/* 课程单元格样式 */
+.course-cell {
+  height: 100%;
+  padding: 5px;
+  position: relative;
+}
+
+.course-info {
+  height: 100%;
+  background-color: #e6f7ff;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course-info.course-changed {
+  background-color: #fff2e8;
+  border: 2px solid #ff7875;
+}
+
+.course-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.course-teacher {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.course-classroom {
+  font-size: 11px;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 课程变动标记 */
+.course-change-marker {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff7875;
+  color: #fff;
+  padding: 2px 6px;
+  font-size: 10px;
+  border-radius: 0 5px 0 5px;
+}
+
+/* 加载中状态样式 */
+.loading-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #1aad19;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-state text {
+  color: #999;
+  font-size: 14px;
+}
+
+/* 空状态样式 */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.empty-state image {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-state text {
+  color: #999;
+  font-size: 14px;
+}
+
+/* 适配不同屏幕尺寸 */
+@media screen and (min-width: 768px) {
+  .course-schedule-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .time-slot {
+    width: 80px;
+  }
+}

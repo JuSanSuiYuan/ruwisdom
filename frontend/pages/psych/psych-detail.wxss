@@ -1,0 +1,250 @@
+/* 心理咨询师详情页面样式 */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  height: 44px;
+  background-color: #1aad19;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  position: relative;
+}
+
+.nav-back {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-back::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  transform: rotate(-45deg);
+}
+
+.nav-title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-right {
+  width: 44px;
+}
+
+/* 医生基本信息 */
+.doctor-info {
+  display: flex;
+  padding: 20px;
+  background-color: white;
+  border-bottom: 1px solid #eee;
+}
+
+.doctor-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  margin-right: 20px;
+}
+
+.doctor-avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.doctor-basic {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.doctor-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doctor-title {
+  font-size: 13px;
+  color: #1aad19;
+  background-color: rgba(26, 173, 25, 0.1);
+  padding: 3px 10px;
+  border-radius: 15px;
+}
+
+.doctor-hospital {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.doctor-available {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.available-text {
+  font-size: 14px;
+  color: #1aad19;
+}
+
+.price-text {
+  font-size: 16px;
+  color: #e64340;
+  font-weight: bold;
+}
+
+/* 医生详细介绍 */
+.doctor-details {
+  padding: 20px;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.detail-section {
+  margin-bottom: 20px;
+}
+
+.detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.section-content {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.time-slot {
+  padding: 6px 15px;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* 预约信息 */
+.appointment-section {
+  padding: 20px;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.appointment-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.appointment-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.item-label {
+  width: 100px;
+  font-size: 14px;
+  color: #333;
+}
+
+.item-content {
+  flex: 1;
+}
+
+.picker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  background-color: #f8f8f8;
+  padding: 0 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #666;
+}
+
+.arrow-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 30px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #666;
+}
+
+.symptoms-input {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #666;
+  background-color: #f8f8f8;
+}
+
+/* 预约按钮 */
+.appointment-btn-container {
+  padding: 20px;
+  background-color: white;
+}
+
+.appointment-btn {
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  background-color: #1aad19;
+  color: white;
+}

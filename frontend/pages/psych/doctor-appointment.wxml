@@ -1,0 +1,117 @@
+<!-- 医生预约页面 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="goBack"></view>
+    <view class="nav-title">医生预约</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 学生信息 -->
+  <view class="student-info">
+    <view class="info-item">
+      <text class="info-label">学生姓名：</text>
+      <text class="info-value">{{studentName}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">请假时间：</text>
+      <text class="info-value">{{leaveTime}}</text>
+    </view>
+  </view>
+
+  <!-- 医生预约信息 -->
+  <view class="doctor-info">
+    <view class="section-title">预约信息</view>
+    
+    <!-- 预约类型 -->
+    <view class="form-item">
+      <view class="form-label">预约类型</view>
+      <view class="form-value">
+        <radio-group bindchange="onAppointmentTypeChange" disabled="{{loading}}">
+          <view class="radio-item">
+            <radio value="physical" checked="{{appointmentType === 'physical'}}"/>
+            <text>体检</text>
+          </view>
+          <view class="radio-item">
+            <radio value="medical" checked="{{appointmentType === 'medical'}}"/>
+            <text>看病</text>
+          </view>
+          <view class="radio-item">
+            <radio value="specialist" checked="{{appointmentType === 'specialist'}}"/>
+            <text>专科咨询</text>
+          </view>
+        </radio-group>
+      </view>
+    </view>
+
+    <!-- 医院选择 -->
+    <view class="form-item">
+      <view class="form-label">医院</view>
+      <view class="form-value">
+        <picker mode="selector" range="{{hospitals}}" bindchange="onHospitalChange" value="{{hospitalIndex}}" disabled="{{loading}}">
+          <view class="picker">
+            {{hospitals[hospitalIndex] || '请选择医院'}}
+            <image src="/images/arrow_down.png" mode="aspectFit" class="arrow-icon"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 预约日期 -->
+    <view class="form-item">
+      <view class="form-label">预约日期</view>
+      <view class="form-value">
+        <picker mode="date" start="{{minDate}}" end="{{maxDate}}" value="{{appointmentDate}}" bindchange="onAppointmentDateChange" disabled="{{loading}}">
+          <view class="picker">
+            {{appointmentDate || '请选择预约日期'}}
+            <image src="/images/arrow_down.png" mode="aspectFit" class="arrow-icon"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 预约人信息 -->
+    <view class="form-item">
+      <view class="form-label">预约人姓名</view>
+      <view class="form-value">
+        <input type="text" placeholder="请输入预约人姓名" value="{{patientName}}" bindinput="onPatientNameInput" disabled="{{loading}}" class="text-input"/>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">身份证号</view>
+      <view class="form-value">
+        <input type="text" placeholder="请输入预约人身份证号" value="{{idCard}}" bindinput="onIdCardInput" disabled="{{loading}}" class="text-input"/>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">联系电话</view>
+      <view class="form-value">
+        <input type="number" placeholder="请输入联系电话" value="{{phone}}" bindinput="onPhoneInput" disabled="{{loading}}" class="text-input"/>
+      </view>
+    </view>
+
+    <!-- 症状描述 -->
+    <view class="form-item">
+      <view class="form-label">症状描述</view>
+      <view class="form-value">
+        <textarea placeholder="请简要描述症状或需求" value="{{symptoms}}" bindinput="onSymptomsInput" disabled="{{loading}}" class="textarea-input"></textarea>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮 -->
+  <view class="action-buttons">
+    <button type="primary" bindtap="submitAppointment" disabled="{{!canSubmit || loading}}" class="submit-btn">
+      {{loading ? '提交预约中...' : '提交预约'}}
+    </button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">正在加载...</text>
+  </view>
+</view>

@@ -1,0 +1,85 @@
+<!-- 儒智慧登录页面 -->
+<view class="login-container">
+  <!-- 应用Logo -->
+  <view class="logo-container">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <text class="app-name">儒智慧</text>
+    <text class="app-slogan">AI赋能教育管理</text>
+  </view>
+  
+  <!-- 登录表单 -->
+  <view class="form-container">
+    <!-- 角色选择 -->
+    <view class="role-selector">
+      <view class="role-item {{selectedRole === 'teacher' ? 'active' : ''}}" bindtap="selectRole" data-role="teacher">
+        <text>教师</text>
+      </view>
+      <view class="role-item {{selectedRole === 'parent' ? 'active' : ''}}" bindtap="selectRole" data-role="parent">
+        <text>家长</text>
+      </view>
+      <view class="role-item {{selectedRole === 'student' ? 'active' : ''}}" bindtap="selectRole" data-role="student">
+        <text>学生</text>
+      </view>
+    </view>
+    
+    <!-- 账号输入 -->
+    <view class="input-item">
+      <image class="input-icon" src="/images/user.png" mode="aspectFit"></image>
+      <input class="input" type="text" placeholder="请输入账号" bindinput="onAccountInput" value="{{account}}"/>
+    </view>
+    
+    <!-- 密码输入 -->
+    <view class="input-item">
+      <image class="input-icon" src="/images/lock.png" mode="aspectFit"></image>
+      <input class="input" password="{{!showPassword}}" placeholder="请输入密码" bindinput="onPasswordInput" value="{{password}}"/>
+      <image class="eye-icon" src="{{showPassword ? '/images/eye_open.png' : '/images/eye_close.png'}}" mode="aspectFit" bindtap="togglePasswordVisibility"></image>
+    </view>
+    
+    <!-- 记住密码 -->
+    <view class="remember-container">
+      <view class="checkbox" bindtap="toggleRememberPassword">
+        <view class="checkbox-inner {{rememberPassword ? 'checked' : ''}}">
+          <text wx:if="{{rememberPassword}}" class="check-icon">✓</text>
+        </view>
+        <text class="checkbox-text">记住密码</text>
+      </view>
+      <text class="forgot-password" bindtap="goToForgotPassword">忘记密码？</text>
+    </view>
+    
+    <!-- 登录按钮 -->
+    <button class="login-btn" bindtap="login" disabled="{{isLoading}}">
+      {{isLoading ? '登录中...' : '登录'}}
+    </button>
+    
+    <!-- 其他登录方式 -->
+    <view class="other-login">
+      <text class="divider-text">其他登录方式</text>
+      <view class="login-methods">
+        <view class="method-item" bindtap="loginWithWechat">
+          <image class="method-icon" src="/images/wechat.png" mode="aspectFit"></image>
+          <text>微信登录</text>
+        </view>
+        <view class="method-item" bindtap="loginWithPhone">
+          <image class="method-icon" src="/images/phone.png" mode="aspectFit"></image>
+          <text>手机号登录</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 用户协议 -->
+  <view class="agreement-container">
+    <text class="agreement-text">登录即表示您同意</text>
+    <text class="agreement-link" bindtap="goToUserAgreement">《用户协议》</text>
+    <text class="agreement-text">和</text>
+    <text class="agreement-link" bindtap="goToPrivacyPolicy">《隐私政策》</text>
+  </view>
+  
+  <!-- 加载遮罩 -->
+  <view class="loading-mask" wx:if="{{isLoading}}">
+    <view class="loading-content">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">登录中...</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,55 @@
+<!-- 心理咨询首页 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-title">心理咨询</view>
+  </view>
+
+  <!-- 页面主体内容 -->
+  <view class="content">
+    <!-- 心理安慰卡片 -->
+    <view class="card" bindtap="goToPsychComfort">
+      <view class="card-icon">
+        <image src="/images/psych_comfort.png" mode="aspectFit"></image>
+      </view>
+      <view class="card-content">
+        <view class="card-title">心理安慰</view>
+        <view class="card-desc">提供情感支持和心理疏导</view>
+      </view>
+    </view>
+
+    <!-- 心理咨询预约卡片 -->
+    <view class="card" bindtap="goToPsychList">
+      <view class="card-icon">
+        <image src="/images/psych_appointment.png" mode="aspectFit"></image>
+      </view>
+      <view class="card-content">
+        <view class="card-title">预约心理医生</view>
+        <view class="card-desc">预约医院专业心理咨询师</view>
+      </view>
+    </view>
+
+    <!-- 我的预约卡片 -->
+    <view class="card" bindtap="goToMyAppointments">
+      <view class="card-icon">
+        <image src="/images/my_appointments.png" mode="aspectFit"></image>
+      </view>
+      <view class="card-content">
+        <view class="card-title">我的预约</view>
+        <view class="card-desc">查看和管理您的心理咨询预约</view>
+      </view>
+    </view>
+
+    <!-- 请假辅助卡片 -->
+    <view class="card" bindtap="goToLeaveAssist">
+      <view class="card-icon">
+        <image src="/images/leave_assist.png" mode="aspectFit"></image>
+      </view>
+      <view class="card-content">
+        <view class="card-title">请假辅助</view>
+        <view class="card-desc">高铁、酒店和医院医生预约</view>
+      </view>
+    </view>
+  </view>
+</view>

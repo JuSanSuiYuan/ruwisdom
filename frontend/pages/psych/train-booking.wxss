@@ -1,0 +1,188 @@
+/* 高铁预约页面样式 */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  height: 44px;
+  background-color: #1aad19;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  position: relative;
+}
+
+.nav-back {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-back::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  transform: rotate(-45deg);
+}
+
+.nav-title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-right {
+  width: 44px;
+}
+
+/* 学生信息 */
+.student-info {
+  padding: 15px;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  color: #666;
+  margin-right: 10px;
+}
+
+.info-value {
+  color: #333;
+  font-weight: bold;
+}
+
+/* 车票信息 */
+.ticket-info {
+  padding: 15px;
+  background-color: white;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.form-item {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-value {
+  width: 100%;
+}
+
+.picker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px;
+  background-color: #f8f8f8;
+  padding: 0 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #666;
+}
+
+.arrow-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.text-input {
+  width: 100%;
+  height: 45px;
+  padding: 0 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  background-color: #f8f8f8;
+}
+
+/* 底部操作按钮 */
+.action-buttons {
+  padding: 20px;
+  background-color: white;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  background-color: #1aad19;
+  color: white;
+}
+
+/* 加载状态遮罩 */
+.loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1aad19;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: white;
+  font-size: 14px;
+}

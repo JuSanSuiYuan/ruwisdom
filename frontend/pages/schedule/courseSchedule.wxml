@@ -1,0 +1,74 @@
+<!-- 课程表页面 -->
+<view class="course-schedule-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-title">课程表</view>
+  </view>
+
+  <!-- 学生信息和周次选择 -->
+  <view class="info-bar">
+    <view class="student-info">
+      <text>{{studentInfo.grade}}{{studentInfo.class}} {{studentInfo.name}}</text>
+    </view>
+    <view class="week-selector">
+      <view class="week-btn" bindtap="prevWeek" disabled="{{currentWeek <= 1}}">
+        <text>◀</text>
+      </view>
+      <view class="week-text">第{{currentWeek}}周</view>
+      <view class="week-btn" bindtap="nextWeek" disabled="{{currentWeek >= maxWeek}}">
+        <text>▶</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 课程表主体 -->
+  <view class="schedule-content" wx:if="{{!isLoading}}">
+    <!-- 表头：星期 -->
+    <view class="schedule-header">
+      <view class="time-slot-header">节次</view>
+      <view class="weekday-header" wx:for="{{weekdays}}" wx:key="index">
+        <text>{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 课程表内容 -->
+    <scroll-view scroll-y class="schedule-scroll">
+      <view class="schedule-body">
+        <view class="time-row" wx:for="{{timeSlots}}" wx:for-item="timeSlot" wx:for-index="slotIndex" wx:key="slotIndex">
+          <!-- 时间列 -->
+          <view class="time-slot">
+            <text class="slot-index">{{slotIndex + 1}}</text>
+            <text class="slot-time">{{timeSlot.start}}
+{{timeSlot.end}}</text>
+          </view>
+          
+          <!-- 课程列 -->
+          <view class="course-column" wx:for="{{weekdays}}" wx:for-item="weekday" wx:for-index="dayIndex" wx:key="dayIndex" wx:for-item="dayIndex" wx:for-index="index">
+            <view class="course-cell" wx:if="{{courseData[dayIndex] && courseData[dayIndex][slotIndex]}}" data-day="{{dayIndex}}" data-slot="{{slotIndex}}" bindtap="onCourseClick">
+              <view class="course-info {{courseData[dayIndex][slotIndex].isChanged ? 'course-changed' : ''}}">
+                <text class="course-name">{{courseData[dayIndex][slotIndex].name}}</text>
+                <text class="course-teacher">{{courseData[dayIndex][slotIndex].teacher}}</text>
+                <text class="course-classroom">{{courseData[dayIndex][slotIndex].classroom}}</text>
+              </view>
+              <view class="course-change-marker" wx:if="{{courseData[dayIndex][slotIndex].isChanged}}">
+                <text>变动</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 加载中状态 -->
+  <view class="loading-state" wx:elif="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <text>加载课程表中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:else>
+    <image src="/images/empty-schedule.png" mode="aspectFit"></image>
+    <text>暂无课程信息</text>
+  </view>
+</view>

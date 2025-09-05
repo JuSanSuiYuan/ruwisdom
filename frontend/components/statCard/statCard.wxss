@@ -1,0 +1,56 @@
+/* 统计卡片组件样式 */
+.stat-card {
+  width: 48%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fafafa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-number {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #333333;
+  display: block;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #666666;
+  margin-top: 8rpx;
+  display: block;
+}
+
+.stat-icon {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16rpx;
+  font-size: 40rpx;
+}
+
+.icon-image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.icon-text {
+  font-size: 40rpx;
+  color: #1890ff;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 320px) {
+  .stat-card {
+    width: 100%;
+  }
+}

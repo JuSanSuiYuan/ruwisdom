@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "仪表盘",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "light",
+  "backgroundColor": "#f5f5f5",
+  "usingComponents": {
+    "stat-card": "/components/statCard/statCard",
+    "activity-item": "/components/activityItem/activityItem",
+    "function-item": "/components/functionItem/functionItem"
+  }
+}

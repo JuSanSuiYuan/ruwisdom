@@ -1,0 +1,101 @@
+<!-- 高铁预约页面 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="goBack"></view>
+    <view class="nav-title">高铁预约</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 学生信息 -->
+  <view class="student-info">
+    <view class="info-item">
+      <text class="info-label">学生姓名：</text>
+      <text class="info-value">{{studentName}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">请假时间：</text>
+      <text class="info-value">{{leaveTime}}</text>
+    </view>
+  </view>
+
+  <!-- 车票信息 -->
+  <view class="ticket-info">
+    <view class="section-title">车票信息</view>
+    
+    <!-- 出发地 -->
+    <view class="form-item">
+      <view class="form-label">出发地</view>
+      <view class="form-value">
+        <picker mode="selector" range="{{cities}}" bindchange="onDepartureCityChange" value="{{departureCityIndex}}" disabled="{{loading}}">
+          <view class="picker">
+            {{cities[departureCityIndex] || '请选择出发城市'}}
+            <image src="/images/arrow_down.png" mode="aspectFit" class="arrow-icon"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 目的地 -->
+    <view class="form-item">
+      <view class="form-label">目的地</view>
+      <view class="form-value">
+        <picker mode="selector" range="{{cities}}" bindchange="onArrivalCityChange" value="{{arrivalCityIndex}}" disabled="{{loading}}">
+          <view class="picker">
+            {{cities[arrivalCityIndex] || '请选择到达城市'}}
+            <image src="/images/arrow_down.png" mode="aspectFit" class="arrow-icon"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 出发日期 -->
+    <view class="form-item">
+      <view class="form-label">出发日期</view>
+      <view class="form-value">
+        <picker mode="date" start="{{minDate}}" end="{{maxDate}}" value="{{departureDate}}" bindchange="onDepartureDateChange" disabled="{{loading}}">
+          <view class="picker">
+            {{departureDate || '请选择出发日期'}}
+            <image src="/images/arrow_down.png" mode="aspectFit" class="arrow-icon"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 乘车人信息 -->
+    <view class="form-item">
+      <view class="form-label">乘车人姓名</view>
+      <view class="form-value">
+        <input type="text" placeholder="请输入乘车人姓名" value="{{passengerName}}" bindinput="onPassengerNameInput" disabled="{{loading}}" class="text-input"/>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">身份证号</view>
+      <view class="form-value">
+        <input type="text" placeholder="请输入乘车人身份证号" value="{{idCard}}" bindinput="onIdCardInput" disabled="{{loading}}" class="text-input"/>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">联系电话</view>
+      <view class="form-value">
+        <input type="number" placeholder="请输入联系电话" value="{{phone}}" bindinput="onPhoneInput" disabled="{{loading}}" class="text-input"/>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮 -->
+  <view class="action-buttons">
+    <button type="primary" bindtap="submitBooking" disabled="{{!canSubmit || loading}}" class="submit-btn">
+      {{loading ? '提交预订中...' : '提交预订'}}
+    </button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">正在加载...</text>
+  </view>
+</view>

@@ -1,0 +1,61 @@
+<!-- 心理安慰页面 -->
+
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="goBack"></view>
+    <view class="nav-title">心理安慰</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 聊天内容区域 -->
+  <view class="chat-container">
+    <!-- 欢迎消息 -->
+    <view class="message-item system">
+      <view class="message-avatar">
+        <image src="/images/psych_robot.png" mode="aspectFit"></image>
+      </view>
+      <view class="message-content">
+        <view class="message-text">您好！我是您的心理安慰助手。请告诉我您现在的感受，我会尽力帮助您。</view>
+        <view class="message-time">{{currentTime}}</view>
+      </view>
+    </view>
+
+    <!-- 聊天记录 -->
+    <view wx:for="{{messages}}" wx:key="index" class="message-item {{item.type}}">
+      <view wx:if="{{item.type === 'user'}}" class="message-avatar user">
+        <image src="{{userAvatar || '/images/default_avatar.png'}}" mode="aspectFit"></image>
+      </view>
+      <view wx:else class="message-avatar">
+        <image src="/images/psych_robot.png" mode="aspectFit"></image>
+      </view>
+      <view class="message-content">
+        <view class="message-text">{{item.content}}</view>
+        <view class="message-time">{{item.time}}</view>
+      </view>
+    </view>
+
+    <!-- 加载中状态 -->
+    <view wx:if="{{loading}}" class="loading-container">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">正在回复...</text>
+    </view>
+  </view>
+
+  <!-- 输入区域 -->
+  <view class="input-container">
+    <input type="text" placeholder="请输入您的感受或问题..." bindinput="onInputChange" value="{{inputValue}}" class="text-input" confirm-type="send" bindconfirm="sendMessage"/>
+    <button type="primary" bindtap="sendMessage" disabled="{{loading || !inputValue.trim()}}" class="send-btn">发送</button>
+  </view>
+
+  <!-- 常见问题快捷入口 -->
+  <view class="quick-questions" wx:if="{{showQuickQuestions}}">
+    <text class="quick-title">常见问题：</text>
+    <view class="quick-buttons">
+      <button type="default" size="mini" bindtap="sendQuickMessage" data-content="我感到很焦虑">焦虑</button>
+      <button type="default" size="mini" bindtap="sendQuickMessage" data-content="我感到很压力大">压力大</button>
+      <button type="default" size="mini" bindtap="sendQuickMessage" data-content="我感到很沮丧">沮丧</button>
+      <button type="default" size="mini" bindtap="sendQuickMessage" data-content="我感到很孤独">孤独</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,153 @@
+/* 摄像头监控列表页面样式 */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  height: 44px;
+  background-color: #1aad19;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.nav-title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 页面主体内容 */
+.content {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* 加载中状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1aad19;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: #666;
+  font-size: 14px;
+}
+
+/* 摄像头列表 */
+.camera-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.camera-item {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.camera-item:active {
+  background-color: #f0f0f0;
+}
+
+.camera-info {
+  flex: 1;
+}
+
+.camera-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.camera-location {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.camera-status {
+  font-size: 12px;
+}
+
+.camera-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.camera-icon image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 空状态 */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+}
+
+.empty-image {
+  width: 120px;
+  height: 120px;
+  opacity: 0.5;
+  margin-bottom: 10px;
+}
+
+.empty-text {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.empty-subtext {
+  color: #999;
+  font-size: 14px;
+}
+
+/* 错误提示 */
+.toast-error {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 9999;
+}

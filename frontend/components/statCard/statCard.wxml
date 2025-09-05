@@ -1,0 +1,11 @@
+<!-- 统计卡片组件 -->
+<view class="stat-card">
+  <view class="stat-content">
+    <text class="stat-number">{{number}}</text>
+    <text class="stat-label">{{label}}</text>
+  </view>
+  <view class="stat-icon" style="background-color: {{iconBgColor || '#f0f5ff'}};">
+    <image wx:if="{{icon}}" src="{{icon}}" class="icon-image"></image>
+    <text wx:else class="icon-text">{{iconText || '📊'}}</text>
+  </view>
+</view>
