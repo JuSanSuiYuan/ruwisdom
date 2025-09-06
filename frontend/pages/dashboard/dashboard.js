@@ -19,6 +19,7 @@ Page({
       { id: 'notification', name: '通知中心', icon: 'notification-icon', iconName: 'notification' },
       { id: 'analysis', name: '数据分析', icon: 'analysis-icon', iconName: 'analysis' },
       { id: 'schedule', name: '课程表', icon: 'schedule-icon', iconName: 'schedule' },
+      { id: 'election', name: '班干部竞选', icon: 'election-icon', iconName: 'election' },
       { id: 'communication', name: '家校沟通', icon: 'communication-icon', iconName: 'communication' },
       { id: 'leaveRequest', name: '请假申请', icon: 'leave-icon', iconName: 'leave' },
       { id: 'leaveList', name: '我的请假', icon: 'leave-list-icon', iconName: 'leave-list' }
@@ -209,6 +210,9 @@ Page({
         break;
       case 'schedule':
         wx.navigateTo({ url: '/pages/schedule/courseSchedule' });
+        break;
+      case 'election':
+        wx.navigateTo({ url: '/pages/election/election-list' });
         break;
       case 'communication':
         wx.navigateTo({ url: '/pages/communication/messageList' });

@@ -1,0 +1,75 @@
+<!-- 班干部竞选管理页面 -->
+<view class="election-management-container">
+  <!-- 顶部导航栏 -->
+  <view class="top-nav">
+    <view class="nav-title">班干部竞选管理</view>
+  </view>
+
+  <!-- 操作栏 -->
+  <view class="action-bar">
+    <button class="create-button" bindtap="onCreateElection">创建新竞选</button>
+  </view>
+
+  <!-- 竞选列表 -->
+  <view class="election-list">
+    <!-- 加载状态 -->
+    <view class="loading-state" wx:if="{{isLoading && !isRefreshing}}">
+      <text>加载中...</text>
+    </view>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!isLoading && electionList.length === 0}}">
+      <text>暂无竞选活动</text>
+      <button class="empty-button" bindtap="onCreateElection">创建第一个竞选</button>
+    </view>
+    
+    <!-- 竞选列表 -->
+    <block wx:if="{{!isLoading && electionList.length > 0}}">
+      <view class="election-item" wx:for="{{electionList}}" wx:key="id">
+        <!-- 顶部信息 -->
+        <view class="election-header">
+          <view class="election-title-info">
+            <text class="election-title">{{item.title}}</text>
+            <text class="election-position">{{item.position}}</text>
+          </view>
+          <text class="election-class">{{item.className}}</text>
+        </view>
+        
+        <!-- 状态标签 -->
+        <view class="status-tag status-{{item.status}}">
+          <text wx:if="{{item.status === 'ongoing'}}">进行中</text>
+          <text wx:elif="{{item.status === 'ended'}}">已结束</text>
+          <text wx:else>即将开始</text>
+        </view>
+        
+        <!-- 时间信息 -->
+        <view class="election-time">
+          <text class="time-text">开始: {{item.startTime}}</text>
+          <text class="time-text">结束: {{item.endTime}}</text>
+        </view>
+        
+        <!-- 统计信息 -->
+        <view class="election-stats">
+          <text class="stats-text">候选人: {{item.candidatesCount}}人</text>
+          <text class="stats-text">投票数: {{item.votesCount}}票</text>
+        </view>
+        
+        <!-- 操作按钮 -->
+        <view class="election-actions">
+          <button class="detail-button" size="mini" bindtap="onViewElectionDetail" data-id="{{item.id}}">查看详情</button>
+          <button class="edit-button" size="mini" bindtap="onEditElection" data-id="{{item.id}}">编辑</button>
+          <button 
+            class="publish-button" 
+            size="mini" 
+            bindtap="onTogglePublish" 
+            data-id="{{item.id}}" 
+            data-status="{{item.status}}"
+          >
+            {{item.status === 'ongoing' ? '取消发布' : '发布'}}
+          </button>
+          <button class="delete-button" size="mini" type="warn" bindtap="onDeleteElection" data-id="{{item.id}}">删除</button>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

@@ -6,6 +6,8 @@
     "pages/notification/notification",
     "pages/notification/notification-detail",
     "pages/schedule/courseSchedule",
+    "pages/election/election-list",
+    "pages/election/election-detail",
     "pages/homework/homework",
     "pages/analysis/analysis",
     "pages/student/student",
@@ -18,6 +20,9 @@
     "pages/oa/user-management",
     "pages/oa/announcement-management",
     "pages/oa/leave-management",
+    "pages/oa/election-management",
+    "pages/oa/election-create",
+    "pages/oa/election-detail",
     "pages/ai/ai-assistant",
     "pages/camera/camera-list",
     "pages/camera/camera-view"

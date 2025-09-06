@@ -165,6 +165,13 @@ Page({
     });
   },
 
+  // 跳转到选举管理页面
+  navigateToElectionManagement: function() {
+    wx.navigateTo({
+      url: '/pages/oa/election-management'
+    });
+  },
+
   // 跳转到设置页面
   navigateToSettings: function() {
     wx.navigateTo({

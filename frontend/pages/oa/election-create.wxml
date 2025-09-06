@@ -1,0 +1,145 @@
+<!-- 班干部竞选创建/编辑页面 -->
+<view class="election-create-container">
+  <!-- 顶部导航栏 -->
+  <view class="top-nav">
+    <text class="nav-title">{{electionId ? '编辑竞选' : '创建竞选'}}</text>
+  </view>
+
+  <!-- 表单区域 -->
+  <view class="form-section">
+    <!-- 基本信息 -->
+    <view class="form-item">
+      <text class="form-label">竞选标题 *</text>
+      <input 
+        type="text" 
+        placeholder="请输入竞选标题" 
+        value="{{title}}" 
+        bindinput="onTitleInput" 
+        class="form-input"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">职位 *</text>
+      <picker 
+        range="{{positionOptions}}" 
+        value="{{positionOptions.indexOf(position)}}" 
+        bindchange="onPositionChange"
+        class="form-picker"
+      >
+        <view class="picker-text">{{position || '请选择职位'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">班级 *</text>
+      <input 
+        type="text" 
+        placeholder="请输入班级名称" 
+        value="{{className}}" 
+        bindinput="onClassInput" 
+        class="form-input"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">开始时间 *</text>
+      <picker 
+        mode="datetime" 
+        value="{{startTime}}" 
+        bindchange="onStartTimeChange"
+        class="form-picker"
+      >
+        <view class="picker-text">{{startTime || '请选择开始时间'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">结束时间 *</text>
+      <picker 
+        mode="datetime" 
+        value="{{endTime}}" 
+        bindchange="onEndTimeChange"
+        class="form-picker"
+      >
+        <view class="picker-text">{{endTime || '请选择结束时间'}}</view>
+      </picker>
+    </view>
+
+    <!-- 候选人管理 -->
+    <view class="section-title">候选人管理 *</view>
+    
+    <!-- 添加候选人表单 -->
+    <view class="candidate-form">
+      <view class="form-item">
+        <text class="form-label">候选人姓名</text>
+        <input 
+          type="text" 
+          placeholder="请输入候选人姓名" 
+          value="{{newCandidate.name}}" 
+          bindinput="onCandidateNameInput" 
+          class="form-input"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="form-label">候选人口号</text>
+        <input 
+          type="text" 
+          placeholder="请输入候选人口号" 
+          value="{{newCandidate.slogan}}" 
+          bindinput="onCandidateSloganInput" 
+          class="form-input"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="form-label">候选人描述</text>
+        <textarea 
+          placeholder="请输入候选人描述" 
+          value="{{newCandidate.description}}" 
+          bindinput="onCandidateDescriptionInput" 
+          class="form-textarea"
+          auto-height="true"
+        />
+      </view>
+
+      <button class="add-candidate-button" bindtap="onAddCandidate">添加候选人</button>
+    </view>
+
+    <!-- 候选人列表 -->
+    <view class="candidates-list" wx:if="{{candidates.length > 0}}">
+      <view class="candidate-item" wx:for="{{candidates}}" wx:key="id">
+        <view class="candidate-info">
+          <text class="candidate-name">{{item.name}}</text>
+          <text class="candidate-slogan">{{item.slogan}}</text>
+          <text class="candidate-description">{{item.description}}</text>
+        </view>
+        <view class="candidate-actions">
+          <button 
+            class="delete-candidate-button" 
+            size="mini" 
+            type="warn" 
+            bindtap="onDeleteCandidate" 
+            data-id="{{item.id}}"
+          >
+            删除
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮 -->
+  <view class="action-buttons">
+    <button class="cancel-button" bindtap="onCancel">取消</button>
+    <button 
+      class="submit-button" 
+      type="primary" 
+      bindtap="onSubmit" 
+      disabled="{{isSubmitting}}"
+    >
+      {{isSubmitting ? '提交中...' : '提交'}}
+    </button>
+  </view>
+</view>

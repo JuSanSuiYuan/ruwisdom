@@ -1,0 +1,104 @@
+<!-- election-detail.wxml -->
+<view class="election-detail-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="back-button" bindtap="onBackTap">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="nav-title">竞选详情</text>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 详情内容 -->
+  <view wx:else class="election-content">
+    <!-- 基本信息 -->
+    <view class="basic-info">
+      <view class="header-section">
+        <text class="election-title">{{electionDetail.title}}</text>
+        <text class="election-position">{{electionDetail.position}}</text>
+      </view>
+      
+      <view class="status-info">
+        <text class="status-text">{{getStatusText(electionDetail.status)}}</text>
+        <text class="time-text">{{electionDetail.startTime}} - {{electionDetail.endTime}}</text>
+      </view>
+    </view>
+
+    <!-- 描述和规则 -->
+    <view class="description-section">
+      <text class="section-title">竞选描述</text>
+      <text class="description-text">{{electionDetail.description}}</text>
+    </view>
+
+    <view class="rules-section">
+      <text class="section-title">投票规则</text>
+      <text class="rules-text">{{electionDetail.rules}}</text>
+    </view>
+
+    <!-- 班长权限 -->
+    <view class="permissions-section">
+      <text class="section-title">{{electionDetail.position}}权限</text>
+      <view class="permissions-list">
+        <block wx:for="{{electionDetail.positionPermissions}}" wx:key="index">
+          <view class="permission-item">
+            <text class="permission-icon">•</text>
+            <text class="permission-text">{{item}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 候选人列表 -->
+    <view class="candidates-section">
+      <text class="section-title">候选人</text>
+      <view class="candidates-list">
+        <block wx:for="{{candidates}}" wx:key="id">
+          <view class="candidate-item {{selectedCandidateId === item.id ? 'selected' : ''}} {{isVoted ? 'voted' : ''}}" bindtap="selectCandidate" data-id="{{item.id}}">
+            <!-- 候选人信息 -->
+            <view class="candidate-info">
+              <view class="avatar-container">
+                <image class="candidate-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+              </view>
+              <view class="candidate-details">
+                <text class="candidate-name">{{item.name}}</text>
+                <text class="candidate-slogan">{{item.slogan}}</text>
+                <text class="candidate-description">{{item.description}}</text>
+              </view>
+            </view>
+            
+            <!-- 票数 -->
+            <view class="votes-info">
+              <text class="votes-count">{{item.votes}}票</text>
+              <view class="vote-progress">
+                <view class="vote-progress-bar" style="width: {{(item.votes / electionDetail.currentVotes) * 100}}%"></view>
+              </view>
+            </view>
+            
+            <!-- 选择标记 -->
+            <view class="select-mark {{selectedCandidateId === item.id ? 'selected' : ''}}">
+              <text class="check-icon">✓</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 投票统计 -->
+    <view class="vote-stats">
+      <text class="stats-text">已投票: {{electionDetail.currentVotes}}/{{electionDetail.totalStudents}} ({{(electionDetail.currentVotes / electionDetail.totalStudents) * 100 | numberFixed}}%)</text>
+    </view>
+
+    <!-- 投票按钮 -->
+    <view class="vote-action">
+      <button class="vote-button {{!selectedCandidateId || isVoted || electionDetail.status !== 'ongoing' ? 'disabled' : ''}}" bindtap="submitVote" disabled="{{!selectedCandidateId || isVoted || electionDetail.status !== 'ongoing'}}">
+        {{isVoted ? '已投票' : electionDetail.status !== 'ongoing' ? '投票已结束' : '提交投票'}}
+      </button>
+    </view>
+  </view>
+</view>

@@ -69,6 +69,10 @@ Component({
             iconText = '📅';
             bgColor = '#f0f5ff';
             break;
+          case 'election':
+            iconText = '🗳️';
+            bgColor = '#fff7e6';
+            break;
           case 'communication':
             iconText = '💬';
             bgColor = '#f9f0ff';

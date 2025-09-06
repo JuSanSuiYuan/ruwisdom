@@ -1,0 +1,99 @@
+<!-- 班干部竞选详情页面 -->
+<view class="election-detail-container">
+  <!-- 顶部导航栏 -->
+  <view class="top-nav">
+    <text class="nav-title">竞选详情</text>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{isLoading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 详情内容 -->
+  <view class="detail-content" wx:if="{{!isLoading && electionDetail}}">
+    <!-- 基本信息 -->
+    <view class="basic-info-section">
+      <view class="election-header">
+        <text class="election-title">{{electionDetail.title}}</text>
+        <text class="election-position">{{electionDetail.position}}</text>
+      </view>
+      
+      <!-- 状态标签 -->
+      <view class="status-tag status-{{electionDetail.status}}">
+        <text wx:if="{{electionDetail.status === 'ongoing'}}">进行中</text>
+        <text wx:elif="{{electionDetail.status === 'ended'}}">已结束</text>
+        <text wx:else>即将开始</text>
+      </view>
+      
+      <view class="election-info">
+        <text class="info-item">班级: {{electionDetail.className}}</text>
+        <text class="info-item">开始时间: {{electionDetail.startTime}}</text>
+        <text class="info-item">结束时间: {{electionDetail.endTime}}</text>
+        <text class="info-item">总人数: {{electionDetail.totalStudents}}人</text>
+        <text class="info-item">投票人数: {{electionDetail.totalVotes}}人</text>
+        <text class="info-item">投票率: {{electionDetail.voterTurnout}}</text>
+      </view>
+    </view>
+
+    <!-- 职位权限 -->
+    <view class="permissions-section">
+      <text class="section-title">{{electionDetail.position}}权限</text>
+      <view class="permissions-list">
+        <block wx:for="{{electionDetail.positionPermissions}}" wx:key="index">
+          <view class="permission-item">
+            <text class="permission-icon">•</text>
+            <text class="permission-text">{{item}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 候选人投票结果 -->
+    <view class="candidates-section">
+      <text class="section-title">候选人投票结果</text>
+      <view class="candidates-list">
+        <block wx:for="{{candidates}}" wx:key="id">
+          <view class="candidate-item">
+            <!-- 候选人信息 -->
+            <view class="candidate-info">
+              <view class="avatar-container">
+                <image class="candidate-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+              </view>
+              <view class="candidate-details">
+                <text class="candidate-name">{{item.name}}</text>
+                <text class="candidate-slogan">{{item.slogan}}</text>
+                <text class="candidate-description">{{item.description}}</text>
+              </view>
+            </view>
+            
+            <!-- 票数 -->
+            <view class="votes-info">
+              <text class="votes-count">{{item.votes}}票</text>
+              <text class="votes-percentage">{{item.percentage}}</text>
+            </view>
+            
+            <!-- 投票进度条 -->
+            <view class="votes-progress">
+              <view 
+                class="progress-bar" 
+                style="width: {{item.percentage}}"
+              ></view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons" wx:if="{{electionDetail.status === 'ended'}}">
+      <button class="export-button" bindtap="onExportResults">导出结果</button>
+    </view>
+  </view>
+
+  <!-- 错误状态 -->
+  <view class="error-state" wx:if="{{!isLoading && !electionDetail}}">
+    <text>获取竞选详情失败</text>
+    <button class="back-button" bindtap="onBack">返回</button>
+  </view>
+</view>

@@ -1,0 +1,67 @@
+<!-- election-list.wxml -->
+<view class="election-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <text class="nav-title">班干部竞选</text>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading && electionList.length === 0}}" class="loading-container">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{!loading && electionList.length === 0}}" class="empty-container">
+    <view class="empty-icon"></view>
+    <text class="empty-text">暂无竞选活动</text>
+  </view>
+
+  <!-- 竞选列表 -->
+  <view wx:else class="election-list">
+    <block wx:for="{{electionList}}" wx:key="id">
+      <view class="election-item" bindtap="viewElectionDetail" data-id="{{item.id}}">
+        <!-- 顶部信息 -->
+        <view class="election-header">
+          <text class="election-title">{{item.title}}</text>
+          <text class="election-position">{{item.position}}</text>
+        </view>
+
+        <!-- 状态标签 -->
+        <view class="status-tag {{item.status === 'ongoing' ? 'status-ongoing' : item.status === 'ended' ? 'status-ended' : 'status-upcoming'}}">
+          {{getStatusText(item.status)}}
+        </view>
+
+        <!-- 时间信息 -->
+        <view class="election-time">
+          <text class="time-text">
+            {{item.startTime}} - {{item.endTime}}
+          </text>
+        </view>
+
+        <!-- 投票或结果信息 -->
+        <view class="election-stats">
+          <block wx:if="{{item.status === 'ongoing'}}">
+            <text class="stats-text">已投票: {{item.currentVotes}}/{{item.totalStudents}}</text>
+          </block>
+          <block wx:elif="{{item.status === 'ended'}}">
+            <text class="stats-text">获胜者: {{item.winner}} ({{item.winnerVotes}}票)</text>
+          </block>
+        </view>
+
+        <!-- 操作按钮 -->
+        <view class="election-actions">
+          <view class="action-button" bindtap="viewElectionDetail" data-id="{{item.id}}">
+            <text class="button-text">查看详情</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 加载更多 -->
+  <view wx:if="{{loading && electionList.length > 0}}" class="loading-more">
+    <view class="loading-spinner small"></view>
+    <text class="loading-more-text">加载更多...</text>
+  </view>
+</view>

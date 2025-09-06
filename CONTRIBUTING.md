@@ -78,6 +78,6 @@
 如有任何问题或需要进一步的帮助，请通过以下方式联系我们：
 
 - GitHub Issues：在项目仓库中提交问题
-- 邮件：contact@ruwisdom.com
+- 邮件：xinglingboy@126.com   
 
 再次感谢您的贡献！

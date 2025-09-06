@@ -151,6 +151,10 @@
   background-color: #f9f0ff;
 }
 
+.election-icon {
+  background-color: #fff7e6;
+}
+
 .function-icon image {
   width: 50rpx;
   height: 50rpx;

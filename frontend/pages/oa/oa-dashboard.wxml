@@ -63,6 +63,12 @@
         </view>
         <text class="function-name">请假管理</text>
       </view>
+      <view class="function-item" bindtap="navigateToElectionManagement">
+        <view class="function-icon election-icon">
+          <text style="font-size: 48rpx;">🗳️</text>
+        </view>
+        <text class="function-name">竞选管理</text>
+      </view>
     </view>
   </view>
 

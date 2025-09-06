@@ -145,6 +145,10 @@
   background-color: #f6ffed;
 }
 
+.election-icon {
+  background-color: #fff7e6;
+}
+
 .function-name {
   font-size: 24rpx;
   color: #333333;

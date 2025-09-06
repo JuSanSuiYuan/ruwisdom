@@ -1,0 +1,217 @@
+/* election-list.wxss */
+.election-container {
+  padding-bottom: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  height: 100rpx;
+  background-color: #3a8ee6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.nav-title {
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+/* 加载状态 */
+.loading-container {
+  padding: 100rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  width: 50rpx;
+  height: 50rpx;
+  border: 6rpx solid #f3f3f3;
+  border-top: 6rpx solid #3a8ee6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-spinner.small {
+  width: 30rpx;
+  height: 30rpx;
+  border-width: 4rpx;
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #888;
+}
+
+/* 空状态 */
+.empty-container {
+  padding: 150rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-icon {
+  width: 160rpx;
+  height: 160rpx;
+  background-color: #e6e6e6;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #888;
+}
+
+/* 竞选列表 */
+.election-list {
+  padding: 20rpx;
+}
+
+.election-item {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.election-item:active {
+  transform: scale(0.98);
+  box-shadow: 0 1rpx 5rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 顶部信息 */
+.election-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.election-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.election-position {
+  font-size: 28rpx;
+  color: #3a8ee6;
+  background-color: #e6f2ff;
+  padding: 6rpx 16rpx;
+  border-radius: 100rpx;
+  margin-left: 15rpx;
+}
+
+/* 状态标签 */
+.status-tag {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+  padding: 6rpx 20rpx;
+  border-radius: 100rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.status-ongoing {
+  background-color: #fff7e6;
+  color: #ff9d00;
+}
+
+.status-ended {
+  background-color: #f0f0f0;
+  color: #888;
+}
+
+.status-upcoming {
+  background-color: #e6f2ff;
+  color: #3a8ee6;
+}
+
+/* 时间信息 */
+.election-time {
+  margin-bottom: 15rpx;
+}
+
+.time-text {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 统计信息 */
+.election-stats {
+  margin-bottom: 20rpx;
+}
+
+.stats-text {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 操作按钮 */
+.election-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-button {
+  padding: 12rpx 40rpx;
+  background-color: #3a8ee6;
+  color: #fff;
+  border-radius: 100rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.action-button:active {
+  background-color: #3079c1;
+}
+
+/* 加载更多 */
+.loading-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx 0;
+}
+
+.loading-more-text {
+  margin-left: 15rpx;
+  font-size: 28rpx;
+  color: #888;
+}
+
+/* 动画 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 响应式设计 */
+@media screen and (min-width: 768px) {
+  .election-container {
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.1);
+  }
+}
